@@ -1,0 +1,17 @@
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            $(function(){
+                title = ('{{ message }}').split('!!')[0]
+                text = ('{{ message }}').split('!!')[1].split(',')[0]
+                type = ('{{ message }}').split(',')[1]
+                new PNotify({
+                    title: title,
+                    text: text,
+                    type:  type
+                });
+            });
+        </script>
+    {% endfor %}
+{% endif %}

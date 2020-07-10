@@ -1,0 +1,87 @@
+{% extends 'partials/base/base.html' %}
+{% load static %}
+
+
+{% block body_content %}
+
+	<!-- start: page -->
+	<section class="body-sign">
+		<div class="center-sign">
+
+			<a href="/" class="logo pull-left">
+				<img src="{% static 'images/logo_harpia.png' %}" height="54" alt="Porto Admin" />
+			</a>
+
+			<div class="panel panel-sign">
+				<div class="panel-title-sign mt-xl text-right">
+					<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Cadastrar</h2>
+				</div>
+				<div class="panel-body">
+					<form action="{% url 'signup' %}" method="POST">
+						{% csrf_token %}
+						<div class="form-group mb-lg">
+							<label>Usuário</label>
+							<input name="name" type="text" class="form-control input-lg" required/>
+						</div>
+
+						<div class="form-group mb-lg">
+							<label>Email</label>
+							<input name="email" type="email" class="form-control input-lg" required/>
+						</div>
+
+						<div class="form-group mb-none">
+							<div class="row">
+								<div class="col-sm-6 mb-lg">
+									<label>Senha</label>
+									<input name="pwd" type="password" class="form-control input-lg" required/>
+								</div>
+								<div class="col-sm-6 mb-lg">
+									<label>Confirmar senha</label>
+									<input name="pwd_confirm" type="password" class="form-control input-lg" required/>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-14">
+							<script src='https://www.google.com/recaptcha/api.js'></script>
+							<label>Verificação de segurança</label>
+							<div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="{{ site_key }}"></div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="checkbox-custom checkbox-default">
+									<input id="AgreeTerms" name="agreeterms" type="checkbox" required/>
+									<label for="AgreeTerms">Concordo com os <a href="#">termos de uso</a></label>
+								</div>
+							</div>
+							<div class="col-sm-4 text-right">
+								<button type="submit" class="btn btn-primary hidden-xs">Cadastrar</button>
+								<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Cadastrar</button>
+							</div>
+						</div>
+
+						<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+							<span>OU</span>
+						</span>
+
+						<div class="mb-xs text-center">
+							<a class="btn btn-facebook mb-md ml-xs mr-xs">Conectar com <i class="fa fa-facebook"></i></a>
+							<a class="btn btn-twitter mb-md ml-xs mr-xs">Conectar com <i class="fa fa-twitter"></i></a>
+						</div>
+
+						<p class="text-center">Já tem uma conta? <a href="{% url 'signin' %}">Entre!</a>
+
+					</form>
+				</div>
+			</div>
+			{% now "Y" as current_year %}
+			<p class="text-center text-muted mt-md mb-md">&copy; Copyright {{ current_year }}. Developed by <a href="https://www.harpiahealth.com/">Harpia Health Solutions</a>.</p>
+		</div>
+	</section>
+
+
+	<!-- end: page -->
+{% endblock %}
+
+{% include '../../partials/alert.html' %}

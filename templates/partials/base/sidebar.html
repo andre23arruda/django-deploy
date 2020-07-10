@@ -1,0 +1,86 @@
+{% load static %}
+<aside id="sidebar-left" class="sidebar-left">
+    <div class="sidebar-header">
+        <div class="sidebar-title">
+            <p style="color: azure; font-weight: bolder;">Navigation</p>
+        </div>
+        <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+            <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+        </div>
+    </div>
+
+    <div class="nano">
+        <div class="nano-content">
+            <nav id="menu" class="nav-main" role="navigation">
+                <ul class="nav nav-main">
+                    <li>
+                        <a href="{% url 'index' %}">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-parent">
+                        <li>
+                            <a href="{% url 'table' %}">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span>Tabela</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'form' %}">
+                                <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                                <span>Formulário</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'form_paciente' %}">
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+                                <span>Formulário Paciente</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url '404' %}">
+                                <strong>404</strong>  &nbsp
+                                <span>Página 404</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url '500' %}">
+                                <strong>500</strong>  &nbsp
+                                <span>Página 500</span>
+                            </a>
+                        </li>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span>Usuário</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{% url 'signup' %}">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'signin' %}">
+                                    <i class="fa fa-male" aria-hidden="true"></i>
+                                    <span>Sign In</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../accounts/password_reset/">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                    <span>Recuperar senha</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</aside>
+<!-- end: sidebar -->

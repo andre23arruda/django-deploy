@@ -1,0 +1,11 @@
+{
+  "name": "dwv-jqmobile",
+  "short_name": "dwv-jqmobile",
+  "description": "Visualizador de imagens médicas usando DWV (DICOM Web Viewer) e jQuery Mobile.",
+  "display": "standalone",
+  "background_color": "#3E4EB8",
+  "theme_color": "#2F3BA2",
+  "scope": ".",
+  "start_url": "index.html",
+  "icons": []
+}

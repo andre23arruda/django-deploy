@@ -1,0 +1,18 @@
+{% load static %}
+
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>Protocolos</h2>
+    </header>
+
+    <div class="row">
+        <!-- Nome do paciente -->
+        {% include '../partials/protocolos/protocolo_idpaciente.html' %}
+
+        <!-- Quadros dos protocolos -->
+        {% include '../partials/protocolos/protocolo_quadro.html' %}
+    </div>
+
+    <!-- Check protocolos -->
+    {% include '../partials/protocolos/protocolo_checkbox.html' %}
+</section>

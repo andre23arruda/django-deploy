@@ -1,0 +1,45 @@
+{% load static %}
+
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>Protocolos</h2>
+    </header>
+
+    <div class="row">
+        <!-- Nome do paciente -->
+        {% include '../partials/protocolos_view/protocolo_idpaciente.html' %}
+
+        <!-- Quadros dos protocolos -->
+            <div class="col-md-12">
+                <div class="tabs">
+
+                    <ul class="nav nav-tabs">
+
+                        <li class="active">
+                            <a href="#popular" data-toggle="tab"><i class="fa fa-star"></i> Popular</a>
+                        </li>
+
+                        <li>
+                            <a href="#recent" data-toggle="tab">Recent</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div id="popular" class="tab-pane active">
+                            {% include '../partials/protocolos_view/protocolo_quadro.html' %}
+                        </div>
+
+                        <div id="recent" class="tab-pane">
+                            <p><p>Ainda não sei o que colocar aqui!!</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <!-- Check protocolos -->
+    {% include '../partials/protocolos_view/protocolo_checkbox.html' %}
+</section>

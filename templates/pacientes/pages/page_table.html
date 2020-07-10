@@ -1,0 +1,22 @@
+{% extends '../../partials/base/base.html' %}
+{% load static %}
+
+{% block body_content %}
+    <section class="body">
+
+        <!-- start: header -->
+        {% include '../../partials/base/header.html' %}
+		<!-- end: header -->
+
+			<div class="inner-wrapper" style="background-color: #fdfdfd">
+                <!-- start: sidebar -->
+                {% include '../../partials/base/sidebar.html' %}
+                <!-- end: sidebar -->
+
+                <!-- start: page -->
+                {% include '../base/base_table.html' %}
+                <!-- end: page -->
+			</div>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,154 @@
+{% load static %}
+
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>Formulário Paciente</h2>
+
+    </header>
+
+    <!-- start: page -->
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Paciente</h2>
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal form-bordered" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="inputDefault">Nome</label>
+                            <div class="col-md-6">
+                                <input name="nome" type="text" class="form-control" id="inputDefault" placeholder="João" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="inputDefault">Sobrenome</label>
+                            <div class="col-md-6">
+                                <input name="sobrenome" type="text" class="form-control" id="inputDefault" placeholder="Silva" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="inputDefault">Email</label>
+                            <div class="col-md-6">
+                                <input name="email" type="text" class="form-control" id="inputDefault" placeholder="joao@gmail.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Data de nascimento</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="input-group input-group-icon">
+                                            <span class="input-group-addon">
+                                                <span class="icon"><i class="fa fa-calendar"></i></span>
+                                            </span>
+                                            <input name="data_nascimento" type="text" data-plugin-datepicker="" data-date-format="dd/mm/yyyy" placeholder="01/01/2010" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-2 control-label" for="w4-phone">Telefone</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group input-group-icon">
+                                            <span class="input-group-addon">
+                                                <span class="icon"><i class="fa fa-phone"></i></span>
+                                            </span>
+                                            <input name="phone" id="phone" data-plugin-masked-input data-input-mask="(99) 99999-9999" placeholder="(12) 12335-1234" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Massa Corporal</label>
+                            <div class="col-md-6">
+                                <div class="mt-lg mb-lg slider-primary" data-plugin-slider data-plugin-options='{ "value": 500, "range": "min", "max": 2000 }' data-plugin-slider-output="#listenSlider">
+                                    <input name="massa" id="listenSlider" type="hidden" value="50" required>
+                                </div>
+                                <p class="output">Massa selecionada: <b>50</b>kg</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Altura (cm)</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:150, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 300 }">
+                                            <div class="input-group">
+                                                <div class="spinner-buttons input-group-btn">
+                                                    <button type="button" class="btn btn-default spinner-up">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                                <input name="estatura" type="text" class="spinner-input form-control" maxlength="3">
+                                                <div class="spinner-buttons input-group-btn">
+                                                    <button type="button" class="btn btn-default spinner-down">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-2 control-label">Gênero</label>
+                                    <div class="col-sm-5">
+                                        <select name="genero" id="company" class="form-control" required="">
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Feminino</option>
+                                        </select>
+                                        <label class="error" for="company"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Unidade</label>
+                            <div class="col-md-6">
+                                <select name="unidade" id="company" class="form-control" required="">
+                                    {% for unidade in unidades %}
+                                        <option value="{{ unidade.cidade }}">{{ unidade.cidade }} - {{ unidade.estado }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label class="error" for="company"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Responsável</label>
+                            <div class="col-md-6">
+                                <select name="responsavel" id="company" class="form-control" required="">
+                                    {% for responsavel in responsaveis %}
+                                        <option value="{{ responsavel.nome }}">{{ responsavel.nome }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label class="error" for="company"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Status</label>
+                            <div class="col-md-6">
+                                <select name="status" id="company" class="form-control" required="">
+                                    <option value="Aberto">Aberto</option>
+                                    <option value="Em andamento">Em andamento</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                </select>
+                                <label class="error" for="company"></label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-9 text-right">
+                            <button class="btn btn-primary">Enviar</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

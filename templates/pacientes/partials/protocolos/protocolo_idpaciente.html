@@ -1,0 +1,71 @@
+<!-- Identificação do paciente -->
+<div class="col-md-12 col-lg-12">
+    <section class="panel panel-featured-top panel-featured-quartenary">
+        <div class="panel-body">
+            <div class="widget-summary">
+                <div class="widget-summary-col widget-summary-col-icon">
+                    <div class="summary-icon bg-quartenary">
+                        <i class="fa fa-user"></i>
+                    </div>
+                </div>
+                <div class="widget-summary-col">
+                    <div class="summary">
+                        <h4 class="titlePatient"><strong>Paciente:</strong> {{ paciente.nome }} {{ paciente.sobrenome }} </h4>
+                        <div class="info">
+                            <h4><strong>ID: </strong>{{ paciente.id }}</h4>
+                            <h6><strong>Email: </strong>{{ paciente.email }}</h6>
+                        </div>
+                    </div>
+                    <div class="summary-footer">
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalInfo">Visualizar</button>
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalProtocolos">Definir Protocolos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Informaçoes do paciente -->
+<div id="modalInfo" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide modal-global">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">Informações do Paciente</h2>
+        </header>
+        <div class="panel-body">
+            <label class="col-sm-3 control-label">Name:</label>
+            <label class="col-sm-9 control-label text-semi-bold">{{ paciente.nome }} {{ paciente.sobrenome }}</label><br>
+
+            <label class="col-sm-3 control-label">Nascimento:</label>
+            <label class="col-sm-9 control-label text-semi-bold">{{ paciente.data_nascimento }} </label><br>
+
+            <label class="col-sm-3 control-label">Massa Corporal:</label>
+            <label class="col-sm-9 control-label text-semi-bold">{{ paciente.massa_corporal }}kg</label><br>
+
+            <label class="col-sm-3 control-label">Estatura:</label>
+            <label class="col-sm-9 control-label text-semi-bold">{{ paciente.estatura }}cm</label><br>
+
+            <label class="col-sm-3 control-label">Unidade:</label>
+            <label class="col-sm-9 control-label text-semi-bold">{{ paciente.unidade }}</label><br>
+
+            <label class="col-sm-3 control-label">Responsável:</label>
+            <label class="col-sm-9 control-label text-semi-bold">{{ paciente.responsavel }}</label><br>
+
+            <label class="col-sm-3 control-label">Status:</label>
+            {% if paciente.status %}
+                <label class="col-sm-9 control-label text-semi-bold text-success">Finalizado</label><br>
+            {% else %}
+                <label class="col-sm-9 control-label text-semi-bold text-warning">Em andamento</label><br>
+            {% endif %}
+
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary modal-confirm" id="impCustom">Editar</button>
+                    <button class="btn btn-default modal-dismiss modal-close">Fechar</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
