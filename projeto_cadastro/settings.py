@@ -19,9 +19,9 @@ RECAPTCHA_SITE_KEY = KEYS['RECAPTCHA_SITE_KEY']
 RECAPTCHA_SECRET_KEY = KEYS['RECAPTCHA_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = KEYS['DEBUG']
 
-ALLOWED_HOSTS = ['andre23arruda.pythonanywhere.com']
+ALLOWED_HOSTS = KEYS['ALLOWED_HOSTS']
 
 
 # Application definition
