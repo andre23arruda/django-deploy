@@ -194,6 +194,15 @@ def page_table(request):
         return redirect('../usuarios/signin')
 
 
+def error_404_view(request, exception):
+    return render(request,'error/page_404.html')
+
+
+def error_500_view(request, exception):
+    data = {"name": "ThePythonDjango.com"}
+    return render(request,'error/500.html', data)
+
+
 def dicom_viewer(request):
     if request.user.is_authenticated:
         return render(request, 'pages/viewer.html')

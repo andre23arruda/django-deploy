@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views
+from django.conf.urls import handler404, handler500
 
+from .views import error_404, error_500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,3 +15,5 @@ urlpatterns = [
     path('usuarios/', include('usuarios.urls')),
     path('resultados/', include('resultados.urls'))
 ]
+
+handler404 = 'cadastro_pessoa.views.error_404_view'
