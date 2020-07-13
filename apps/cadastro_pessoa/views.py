@@ -200,7 +200,7 @@ def error_404_view(request, exception):
 
 def error_500_view(request, exception):
     data = {"name": "ThePythonDjango.com"}
-    return render(request,'error/500.html', data)
+    return render(request,'error/page_500.html', data)
 
 
 def dicom_viewer(request):
