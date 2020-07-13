@@ -3,7 +3,6 @@ from django.urls import path, include
 from django.contrib.auth import views
 from django.conf.urls import handler404, handler500
 
-from .views import error_404, error_500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
