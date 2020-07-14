@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django import template
 from datetime import datetime
 
@@ -24,3 +25,13 @@ def lookup(pacientes, status):
 def percent(value, arg):
     "Multiplies the arg and the value"
     return 100 * (int(value)/int(arg))
+
+
+@register.filter(name='date2template')
+def date2template(value):
+    return value.strftime("%d/%m/%Y")
+
+
+@register.filter(name='get_responsavel')
+def get_responsavel(paciente):
+    return paciente.responsavel

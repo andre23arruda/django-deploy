@@ -4,9 +4,13 @@
         <div class="panel-body">
             <div class="widget-summary">
                 <div class="widget-summary-col widget-summary-col-icon">
+                    {% if paciente.path_imagem %}
+                        <img src="{{ paciente.path_imagem.url }}" width="95px" height="95px" style="border-radius: 50px; margin-right: 15px;">
+                    {% else %}
                     <div class="summary-icon bg-quartenary">
                         <i class="fa fa-user"></i>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="widget-summary-col">
                     <div class="summary">
@@ -19,6 +23,7 @@
                     <div class="summary-footer">
                         <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalInfo">Visualizar</button>
                         <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalProtocolos">Definir Protocolos</button>
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-danger modal-with-move-anim" href="#modalExclude">Excluir paciente</button>
                     </div>
                 </div>
             </div>
@@ -33,25 +38,25 @@
             <h2 class="panel-title">Informações do Paciente</h2>
         </header>
         <div class="panel-body">
-            <label class="col-sm-3 control-label">Name:</label>
+            <label class="col-sm-3 control-label"><strong>Name:</strong></label>
             <label class="col-sm-9 control-label text-semi-bold">{{ paciente.nome }} {{ paciente.sobrenome }}</label><br>
 
-            <label class="col-sm-3 control-label">Nascimento:</label>
+            <label class="col-sm-3 control-label"><strong>Nascimento:</strong></label>
             <label class="col-sm-9 control-label text-semi-bold">{{ paciente.data_nascimento }} </label><br>
 
-            <label class="col-sm-3 control-label">Massa Corporal:</label>
+            <label class="col-sm-3 control-label"><strong>Massa Corporal:</strong></label>
             <label class="col-sm-9 control-label text-semi-bold">{{ paciente.massa_corporal }}kg</label><br>
 
-            <label class="col-sm-3 control-label">Estatura:</label>
+            <label class="col-sm-3 control-label"><strong>Estatura:</strong></label>
             <label class="col-sm-9 control-label text-semi-bold">{{ paciente.estatura }}cm</label><br>
 
-            <label class="col-sm-3 control-label">Unidade:</label>
+            <label class="col-sm-3 control-label"><strong>Unidade:</strong></label>
             <label class="col-sm-9 control-label text-semi-bold">{{ paciente.unidade }}</label><br>
 
-            <label class="col-sm-3 control-label">Responsável:</label>
+            <label class="col-sm-3 control-label"><strong>Responsável:</strong></label>
             <label class="col-sm-9 control-label text-semi-bold">{{ paciente.responsavel }}</label><br>
 
-            <label class="col-sm-3 control-label">Status:</label>
+            <label class="col-sm-3 control-label"><strong>Status:</strong></label>
             {% if paciente.status %}
                 <label class="col-sm-9 control-label text-semi-bold text-success">Finalizado</label><br>
             {% else %}
@@ -62,10 +67,42 @@
         <footer class="panel-footer">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-primary modal-confirm" id="impCustom">Editar</button>
+                    <a href="../edit_paciente/{{paciente.id}}" class="btn btn-primary" id="impCustom">Editar</a>
                     <button class="btn btn-default modal-dismiss modal-close">Fechar</button>
                 </div>
             </div>
+        </footer>
+    </section>
+</div>
+
+
+<!-- Excluir paciente -->
+<div id="modalExclude" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide modal-global">
+    <section class="panel panel-danger">
+        <header class="panel-heading">
+            <h2 class="panel-title">Atenção!</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-icon">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+                <div class="modal-text">
+                    <h4>Atenção!</h4>
+                    <p>Deseja realmente excluir esse paciente da base de dados?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <form action="../delete_paciente/{{paciente.id}}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-danger" type="submit" id="impCustom">Sim</button>
+                        <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
+                    </div>
+                </div>
+            </form>
         </footer>
     </section>
 </div>

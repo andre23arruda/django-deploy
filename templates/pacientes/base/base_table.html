@@ -5,7 +5,7 @@
 <section role="main" class="content-body" style="padding: 15px;">
     <header class="page-header" style="display: flex; align-items: center; justify-content: space-between; padding: 0px;">
         <h2>Lista de pacientes</h2>
-        <a href="{% url 'form_paciente' %}" class="btn btn-primary"  style="max-height: 34px; margin-right: 30px; text-align: center;">
+        <a href="./form_paciente" class="btn btn-primary"  style="max-height: 34px; margin-right: 30px; text-align: center;">
             <p style="font-size:3hw; overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap">Adicionar paciente <b>+</b></p>
@@ -25,6 +25,7 @@
                         <th> Unidade </th>
                         <th> Responsável </th>
                         <th> Status </th>
+                        <th> Ações </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,10 @@
                                 {% endif %}
                                 &nbsp; {{ paciente.status }}
                             </td>
+                            <td class="actions-hover actions-fade">
+                                <a href="./edit_paciente/{{paciente.id}}"><i class="fa fa-pencil"></i></a>
+                                <a href="#modalExclude" class="modal-with-move-anim"><i class="fa fa-trash-o"></i></a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -62,3 +67,35 @@
     <!-- end: page -->
 
 </section>
+
+
+<!-- Excluir paciente -->
+<div id="modalExclude" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide modal-global">
+    <section class="panel panel-danger">
+        <header class="panel-heading">
+            <h2 class="panel-title">Atenção!</h2>
+        </header>
+        <div class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-icon">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+                <div class="modal-text">
+                    <h4>Atenção!</h4>
+                    <p>Deseja realmente excluir esse paciente da base de dados?</p>
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <form action="./delete_paciente/{{paciente.id}}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-danger" type="submit" id="impCustom">Sim</button>
+                        <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </footer>
+    </section>
+</div>

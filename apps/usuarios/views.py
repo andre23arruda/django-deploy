@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 
-
 from . import src
 
 def page_signin(request):

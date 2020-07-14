@@ -3,14 +3,17 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 
 
+# generos para escolha no cadastro
 GENDER = (('M', 'Masculino'),('F', 'Feminino'))
 
+# lista de status de protocolos
 STATUS = (
     ("Aberto", "Aberto"),
     ("Em andamento", "Em andamento"),
     ("Finalizado", "Finalizado")
 )
 
+# lista de estados para escolher no cadastro
 ESTADOS = [('AC', 'AC'), ('AL', 'AL'), ('AP', 'AP'), ('AM', 'AM'),
            ('BA', 'BA'), ('CE', 'CE'), ('ES', 'ES'), ('GO', 'GO'),
            ('MA', 'MA'), ('MT', 'MT'), ('MS', 'MS'), ('MG', 'MG'),
@@ -21,6 +24,7 @@ ESTADOS = [('AC', 'AC'), ('AL', 'AL'), ('AP', 'AP'), ('AM', 'AM'),
 
 
 class Responsavel(models.Model):
+    '''Resposavel cadastrado'''
     nome = models.CharField(max_length=20, null=False, blank=False)
 
     def __str__(self):
@@ -28,6 +32,7 @@ class Responsavel(models.Model):
 
 
 class Unidade(models.Model):
+    '''Unidade cadastrada'''
     cidade = models.CharField(max_length=40, null=False, blank=False)
     estado = models.CharField(max_length=2, choices=ESTADOS)
 
@@ -49,6 +54,7 @@ class Cliente(models.Model):
 
 
 class Paciente(models.Model):
+    '''Cadastro de paciente'''
     nome = models.CharField(max_length=20, null=False, blank=False)
     sobrenome = models.CharField(max_length=20, null=False, blank=False)
     email = models.EmailField(null=False, blank=False)
@@ -62,6 +68,7 @@ class Paciente(models.Model):
     status = models.CharField(max_length=20, choices=STATUS)
     genero = models.CharField(max_length=1, choices=GENDER)
     protocolos = models.TextField(default='[]')
+    path_imagem = models.ImageField(upload_to=f'images/{datetime.now().strftime("%m/%d/%Y")}', blank=True)
 
     def __str__(self):
         return  f'{self.nome} {self.sobrenome}'

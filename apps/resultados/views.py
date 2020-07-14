@@ -15,3 +15,7 @@ def resultado_signin(request):
 
 def resultado_table(request):
    return render(request, 'resultados/pages/page_table.html')
+
+
+def teste(request):
+   return render(request, 'teste.html')

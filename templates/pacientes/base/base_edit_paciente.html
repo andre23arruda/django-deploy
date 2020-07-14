@@ -1,4 +1,5 @@
 {% load static %}
+{% load tag_library %}
 
 <section role="main" class="content-body">
     <header class="page-header">
@@ -19,14 +20,14 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">Nome</label>
                             <div class="col-md-6">
-                                <input name="nome" type="text" class="form-control" id="inputDefault" placeholder="João" required>
+                                <input name="nome" type="text" class="form-control" id="inputDefault" value="{{ paciente.nome }}" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">Sobrenome</label>
                             <div class="col-md-6">
-                                <input name="sobrenome" type="text" class="form-control" id="inputDefault" placeholder="Silva" required>
+                                <input name="sobrenome" type="text" class="form-control" id="inputDefault" value="{{ paciente.sobrenome }}" required>
                             </div>
                         </div>
 
@@ -37,7 +38,7 @@
                                     <span class="input-group-addon">
                                         <span class="icon"><i class="fa fa-envelope"></i></span>
                                     </span>
-                                    <input type="email" name="email" class="form-control" placeholder="eg.: email@email.com" required="">
+                                    <input type="email" name="email" class="form-control" value="{{ paciente.email }}" required="">
                                 </div>
                             </div>
                         </div>
@@ -51,7 +52,7 @@
                                             <span class="input-group-addon">
                                                 <span class="icon"><i class="fa fa-calendar"></i></span>
                                             </span>
-                                            <input name="data_nascimento" data-plugin-datepicker="99/99/9999" data-date-format="dd/mm/yyyy" data-plugin-masked-input="" data-input-mask="99/99/9999" placeholder="__/__/____" class="form-control" required>
+                                            <input name="data_nascimento" class="form-control" data-plugin-datepicker="99/99/9999" data-date-format="dd/mm/yyyy" data-plugin-masked-input="" data-input-mask="99/99/9999" value="{{ paciente.data_nascimento|date2template }}"  required>
                                         </div>
                                     </div>
                                     <label class="col-sm-2 control-label" for="w4-phone">Telefone</label>
@@ -60,7 +61,7 @@
                                             <span class="input-group-addon">
                                                 <span class="icon"><i class="fa fa-phone"></i></span>
                                             </span>
-                                            <input name="phone" id="phone" data-plugin-masked-input data-input-mask="(99) 99999-9999" placeholder="(12) 12335-1234" class="form-control" required>
+                                            <input name="phone" class="form-control" id="phone" data-plugin-masked-input data-input-mask="(99) 99999-9999" value="{{ paciente.telefone }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +72,7 @@
                             <label class="col-md-3 control-label">Massa Corporal</label>
                             <div class="col-md-6">
                                 <div class="mt-lg mb-lg slider-primary" data-plugin-slider data-plugin-options='{ "value": 500, "range": "min", "max": 2000 }' data-plugin-slider-output="#listenSlider">
-                                    <input name="massa" id="listenSlider" type="hidden" value="50" required>
+                                    <input name="massa" id="listenSlider" type="hidden" value="{{ paciente.massa_corporal }}" required>
                                 </div>
                                 <p class="output">Massa selecionada: <b>50</b>kg</p>
                             </div>
@@ -89,7 +90,7 @@
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                                 </div>
-                                                <input name="estatura" type="text" class="spinner-input form-control" maxlength="3">
+                                                <input name="estatura" type="text" class="spinner-input form-control" maxlength="3" value="{{ paciente.estatura }}">
                                                 <div class="spinner-buttons input-group-btn">
                                                     <button type="button" class="btn btn-default spinner-down">
                                                         <i class="fa fa-minus"></i>
@@ -101,8 +102,16 @@
                                     <label class="col-sm-2 control-label">Gênero</label>
                                     <div class="col-sm-5">
                                         <select name="genero" id="company" class="form-control" required="">
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Feminino</option>
+                                            <option value="M"
+                                                {% if paciente.genero == "M" %}
+                                                    selected
+                                                {% endif %}>Masculino
+                                            </option>
+                                            <option value="F"
+                                                {% if paciente.genero == "F" %}
+                                                    selected
+                                                {% endif %}>Feminino
+                                            </option>
                                         </select>
                                         <label class="error" for="company"></label>
                                     </div>
@@ -115,16 +124,29 @@
                             <div class="col-md-6">
                                 <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
                                     <div class="input-append">
+
                                         <div class="uneditable-input" style="width: 70%;">
                                             <i class="fa fa-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
+                                            <span class="fileupload-preview">
+                                                <input type="text" id="path_imagem_exists" name='path_imagem_exists' value="{{paciente.path_imagem}}" hidden>
+                                                {% if paciente.path_imagem %}
+                                                    <i class="fa fa-file"></i> &nbsp;&nbsp;&nbsp; {{ paciente.path_imagem.url }}
+                                                {% endif %}
+                                            </span>
                                         </div>
+
                                         <span class="btn btn-default btn-file">
-                                            <span class="fileupload-exists">Trocar</span>
-                                            <span class="fileupload-new">Selecionar imagem</span>
-                                            <input type="file" name='path_imagem'>
+                                            <span>Trocar</span>
+                                            <input type="file" id="path_imagem" name='path_imagem'>
                                         </span>
-                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
+                                        <a class="btn btn-default" data-dismiss="fileupload">Remover</a>
+
+                                        {% if paciente.path_imagem %}
+                                            <div class="fileupload-preview">
+                                                <img src="{{ paciente.path_imagem.url }}" width="100px">
+                                            </div>
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
@@ -133,9 +155,13 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Unidade</label>
                             <div class="col-md-6">
-                                <select name="unidade" id="company" class="form-control" required="">
+                                <select name="unidade" class="form-control" required="">
                                     {% for unidade in unidades %}
-                                        <option value="{{ unidade.cidade }}">{{ unidade.cidade }} - {{ unidade.estado }}</option>
+                                        <option value="{{ unidade.cidade }}"
+                                            {% if unidade.id == paciente.unidade_id %}
+                                                selected
+                                            {% endif %}>{{ unidade.cidade }} - {{ unidade.estado }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                                 <label class="error" for="company"></label>
@@ -145,9 +171,14 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Responsável</label>
                             <div class="col-md-6">
-                                <select name="responsavel" id="company" class="form-control" required="">
+                                <select name="responsavel" class="form-control" value="{{ paciente.responsavel_id }}" required="">
                                     {% for responsavel in responsaveis %}
-                                        <option value="{{ responsavel.nome }}">{{ responsavel.nome }}</option>
+                                        <option value="{{ responsavel.nome }}"
+                                            {% if responsavel.id == paciente.responsavel_id %}
+                                                selected
+                                            {% endif %}>
+                                                {{ responsavel.nome }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                                 <label class="error" for="company"></label>
@@ -157,7 +188,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Status</label>
                             <div class="col-md-6">
-                                <select name="status" id="company" class="form-control" required="">
+                                <select name="status" class="form-control" value="{{ paciente.status }}" required="">
                                     <option value="Aberto">Aberto</option>
                                     <option value="Em andamento">Em andamento</option>
                                     <option value="Finalizado">Finalizado</option>

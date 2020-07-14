@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from .models import Cliente, Paciente, Responsavel, Unidade
 from datetime import datetime
 from django.contrib import messages
+from django.conf import settings
+
+import os
 
 from . import src
 
@@ -135,12 +138,13 @@ def page_form_paciente(request):
             responsavel = request.POST['responsavel']
             status = request.POST['status']
             genero = request.POST['genero']
+            path_imagem = request.FILES['path_imagem']
 
             if src.validate_fields([nome, sobrenome, email, data_nascimento,
                                     phone, massa, estatura, unidade, responsavel,
                                     status, genero], request) and not src.pacient_exists(email, request):
                 print(nome, sobrenome, email, data_nascimento, phone, massa, estatura, unidade,
-                      responsavel, status, genero)
+                      responsavel, status, genero, path_imagem)
 
                 pacient = Paciente.objects.create(
                     nome=nome,
@@ -155,7 +159,8 @@ def page_form_paciente(request):
                     responsavel=Responsavel.objects.get(nome=responsavel),
                     status=status,
                     genero=genero,
-                    protocolos='[]'
+                    protocolos='[]',
+                    path_imagem = path_imagem
                 )
                 pacient.save()
                 messages.success(request, 'SUCESSO!! Paciente cadastrado!,success')
@@ -171,15 +176,8 @@ def page_form_paciente(request):
         return redirect('../usuarios/signin')
 
 
-def page_404(request):
-    return render(request, 'error/page_404.html')
-
-
-def page_500(request):
-    return render(request, 'error/page_500.html')
-
-
 def page_table(request):
+    '''Tabela de pacientes'''
     if request.user.is_authenticated:
         pacientes = Paciente.objects.all()
         opts = Paciente._meta
@@ -194,13 +192,102 @@ def page_table(request):
         return redirect('../usuarios/signin')
 
 
+def delete_paciente(request, paciente_id):
+    if request.user.is_authenticated:
+        paciente = get_object_or_404(Paciente, pk = paciente_id)
+        paciente.delete()
+
+        if paciente.path_imagem:
+            try:
+                os.remove(settings.BASE_DIR + paciente.path_imagem.url)
+            except:
+                pass
+
+        print('Paciente deletado!!')
+        messages.error(request, 'Atenção!! Paciente excluído!,error')
+        return redirect('table')
+    else:
+        return redirect('../usuarios/signin')
+
+
+def edit_paciente(request, paciente_id):
+    if request.user.is_authenticated:
+        paciente = get_object_or_404(Paciente, pk = paciente_id)
+        if request.method == 'POST':
+            nome = request.POST['nome']
+            sobrenome = request.POST['sobrenome']
+            email = request.POST['email']
+            data_nascimento =  datetime.strptime(request.POST['data_nascimento'], "%d/%m/%Y").strftime("%Y-%m-%d")
+            phone = request.POST['phone']
+            massa = request.POST['massa']
+            estatura = request.POST['estatura']
+            unidade = request.POST['unidade']
+            responsavel = request.POST['responsavel']
+            status = request.POST['status']
+            genero = request.POST['genero']
+
+            try:
+                path_imagem = request.FILES['path_imagem']
+            except:
+                try:
+                    path_imagem = request.POST['path_imagem_exists']
+                except:
+                    path_imagem = ''
+
+            if src.validate_fields([nome, sobrenome, email, data_nascimento,
+                                    phone, massa, estatura, unidade, responsavel,
+                                    status, genero], request):
+                print('-'*30)
+                print(nome, sobrenome, email, data_nascimento, phone, massa, estatura, unidade,
+                      responsavel, status, genero, path_imagem)
+                print('-'*30)
+
+                paciente.nome = nome
+                paciente.sobrenome = sobrenome
+                paciente.email = email
+                paciente.data_nascimento = data_nascimento
+                paciente.telefone = phone
+                paciente.massa_corporal = massa
+                paciente.estatura = estatura
+                paciente.unidade = Unidade.objects.get(cidade=unidade)
+                paciente.responsavel = Responsavel.objects.get(nome=responsavel)
+                paciente.status = status
+                paciente.genero = genero
+
+                if not(paciente.path_imagem):
+                    paciente.path_imagem = path_imagem
+
+                else:
+                    if paciente.path_imagem.url != path_imagem:
+                        try:
+                            os.remove(settings.BASE_DIR + paciente.path_imagem.url)
+                        except:
+                            pass
+                        paciente.path_imagem = path_imagem
+
+
+                paciente.save()
+                messages.success(request, 'SUCESSO!! Paciente editado!,success')
+                return redirect('table')
+
+        else:
+            data = {
+                'paciente': paciente,
+                'unidades': Unidade.objects.all(),
+                'responsaveis': Responsavel.objects.all()
+            }
+            return render(request, 'pacientes/pages/page_edit_paciente.html', data)
+    else:
+        return redirect('../usuarios/signin')
+
+
 def error_404_view(request, exception):
-    return render(request,'error/page_404.html')
+    return render(request,'error/404.html')
 
 
 def error_500_view(request, exception):
     data = {"name": "ThePythonDjango.com"}
-    return render(request,'error/page_500.html', data)
+    return render(request,'error/500.html', data)
 
 
 def dicom_viewer(request):
