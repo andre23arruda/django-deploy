@@ -136,7 +136,8 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
 # Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = KEYS['MEDIA_ROOT']
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+MEDIA_URL = KEYS['MEDIA_ROOT']
 
 ## Email
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
