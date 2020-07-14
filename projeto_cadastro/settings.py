@@ -134,7 +134,8 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
 
 
 # Media
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = KEYS['MEDIA_ROOT']
 MEDIA_URL = '/media/'
 
 ## Email
