@@ -1,0 +1,246 @@
+{% load static %}
+{% load tag_library %}
+
+
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>Relatório</h2>
+    </header>
+
+    <!-- start: page -->
+    <div class="row">
+
+        <!-- Dados - Protocolos -->
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+
+                    <h2 class="panel-title">Dados - Protocolos</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="row text-center">
+
+                        <div class="col-md-4">
+                            <div class="circular-bar">
+                                {% with pacientes|lookup:'Finalizado' as concluido %}
+                                    {% with pacientes|length as total %}
+                                        <div class="circular-bar-chart" data-percent="{{ concluido|percent:total }}" data-plugin-options='{ "barColor": "#47A447", "delay": 300 }'>
+                                            <strong>Finalizado</strong>
+                                            <label><span class="percent">"{{ concluido|percent:total }}"</span>%</label>
+                                         </div>
+                                    {% endwith %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="circular-bar">
+                                {% with pacientes|lookup:'Aberto' as aberto %}
+                                    {% with pacientes|length as total %}
+                                        <div class="circular-bar-chart" data-percent="{{ aberto|percent:total }}" data-plugin-options='{ "barColor": "#E36159", "delay": 600 }'>
+                                            <strong>Em aberto</strong>
+                                            <label><span class="percent">"{{ aberto|percent:total }}"</span>%</label>
+                                        </div>
+                                    {% endwith %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="circular-bar">
+                                {% with pacientes|lookup:'Em andamento' as andamento %}
+                                    {% with pacientes|length as total %}
+                                        <div class="circular-bar-chart" data-percent="{{ andamento|percent:total }}" data-plugin-options='{ "barColor": "#734BA9", "delay": 600 }'>
+                                            <strong>Em andamento</strong>
+                                            <label><span class="percent">"{{ andamento|percent:total }}"</span>%</label>
+                                        </div>
+                                    {% endwith %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Informações -->
+        <div class="col-md-6 col-lg-12 col-xl-6">
+            <section class="panel panel-transparent">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+
+                    <h2 class="panel-title">
+                        <span class="label label-danger label-sm text-normal va-middle mr-sm">{{ pacientes|lookup:'Aberto' }}</span>
+                        <span class="va-middle">Informações</span>
+                    </h2>
+                </header>
+
+            <div class="col-md-6 col-lg-12 col-xl-6">
+                <div class="row">
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <section class="panel panel-featured-left panel-featured-primary">
+                            <div class="panel-body">
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col widget-summary-col-icon">
+                                        <div class="summary-icon bg-primary">
+                                            <i class="fa fa-group"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <h4 class="title">Número de pacientes</h4>
+                                            <div class="info">
+                                                <strong class="amount">{{ pacientes|length }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="summary-footer">
+                                            <a href="/pacientes/table" class="text-muted text-uppercase">(Ver todos)</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <section class="panel panel-featured-left panel-featured-secondary">
+                            <div class="panel-body">
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col widget-summary-col-icon">
+                                        <div class="summary-icon bg-secondary">
+                                            <i class="fa fa-bomb"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <h4 class="title">Protocolos em aberto</h4>
+                                            <div class="info">
+                                                <strong class="amount">{{ pacientes|lookup:'Aberto' }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="summary-footer">
+                                            <a class="text-muted text-uppercase"><br></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <section class="panel panel-featured-left panel-featured-tertiary">
+                            <div class="panel-body">
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col widget-summary-col-icon">
+                                        <div class="summary-icon bg-tertiary">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <h4 class="title">Usuários cadastrados</h4>
+                                            <div class="info">
+                                                <strong class="amount">{{ usuarios|length }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="summary-footer">
+                                            <a class="text-muted text-uppercase"><br></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <section class="panel panel-featured-left panel-featured-quartenary">
+                            <div class="panel-body">
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col widget-summary-col-icon">
+                                        <div class="summary-icon bg-quartenary">
+                                            <i class="fa fa-rocket"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <h4 class="title">Protocolos em andamento</h4>
+                                            <div class="info">
+                                                <strong class="amount">{{ pacientes|lookup:'Em andamento' }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="summary-footer">
+                                            <a class="text-muted text-uppercase"><br></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <section class="panel panel-featured-left panel-featured-tertiary">
+                            <div class="panel-body">
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col widget-summary-col-icon">
+                                        <div class="summary-icon bg-dark">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <h4 class="title">Responsáveis cadastrados</h4>
+                                            <div class="info">
+                                                <strong class="amount">{{ responsaveis|length }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="summary-footer">
+                                            <a class="text-muted text-uppercase"><br></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <section class="panel panel-featured-left panel-featured-quartenary">
+                            <div class="panel-body">
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col widget-summary-col-icon">
+                                        <div class="summary-icon bg-success">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <h4 class="title">Protocolos finalizados</h4>
+                                            <div class="info">
+                                                <strong class="amount">{{ pacientes|lookup:'Finalizado' }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="summary-footer">
+                                            <a class="text-muted text-uppercase"><br></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+            </section>
+        </div>
+
+    </div>
+    <!-- end: page -->
+</section>

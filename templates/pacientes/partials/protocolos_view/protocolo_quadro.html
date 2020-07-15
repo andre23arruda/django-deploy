@@ -1,4 +1,6 @@
+{% load tag_library %}
+
 <!-- Quadro de procolos -->
-{% for protocolo in protocolos %}
+{% for protocolo, value in exames.items %}
     {% include "./tipos_protocolos/protocolo_"|add:protocolo|add:".html" %}
 {% endfor %}

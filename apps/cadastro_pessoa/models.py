@@ -67,7 +67,7 @@ class Paciente(models.Model):
     responsavel = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS)
     genero = models.CharField(max_length=1, choices=GENDER)
-    protocolos = models.TextField(default='[]')
+    protocolos = models.TextField(default='{}')
     path_imagem = models.ImageField(upload_to=f'images/{datetime.now().strftime("%m/%d/%Y")}', blank=True)
 
     def __str__(self):

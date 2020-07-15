@@ -1,7 +1,10 @@
+{% load tag_library %}
 <section class="panel panel-featured-left panel-featured-success">
+
     <header class="panel-heading panel-collapse collapse in">
         <div class="panel-actions">
             <a href="#" class="fa fa-caret-up"></a>
+            <a href="#" class="fa fa-times"></a>
         </div>
         <div class="widget-summary widget-summary-sm">
             <div class="widget-summary-col widget-summary-col-icon">
@@ -17,88 +20,25 @@
         </div>
 
     </header>
+
     <div class="panel-body" style="display: none;">
-
         <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">1</span> Ângulo Poplíteo Unilateral Passivo:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
+            <div class="col-sm-12"><p class="questionModalProtocol"></span> Campo 1:</p></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Esq:</span><input name="{{data_exame|date_replace}}_lombar" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:0 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dir:</span><input name="{{data_exame|date_replace}}_lombar" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:1 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Esq:</span><input name="{{data_exame|date_replace}}_lombar" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:2 }}" {% endif %}></div></div>
             <div class="col-sm-12"><code>Valor de Referência: Menor do que 30°</code></div>
         </div>
+
         <hr style="margin:8px;">
+
         <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">2</span> Ângulo Poplíteo Unilateral Ativo:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
+            <div class="col-sm-12"><p class="questionModalProtocol"></span> Campo 2:</p></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Esq:</span><input name="{{data_exame|date_replace}}_lombar" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:3 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dir:</span><input name="{{data_exame|date_replace}}_lombar" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:4 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dif:</span><input name="{{data_exame|date_replace}}_lombar" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:5 }}" {% endif %}></div></div>
             <div class="col-sm-12"><code>Valor de Referência: Menor do que 30°</code></div>
         </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">3</span> Teste de Ober:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: Menor do que -25°</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">4</span> Rotação Interna do Quadril:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: 30° a 40°</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">5</span> Rotação Externa do Quadril:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: 40° a 50°</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">6</span> Teste de Thomas Modificado:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: Menor do que -11°</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">7</span> Flexão do Joelho</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: Acima de 135°</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">8</span> Ângulo Poplíteo Unilateral Passivo:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: Menor do que 30°</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">9</span> Extensão do Joelho</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: -10° a 0°	</code></div>
-        </div>
-        <hr style="margin:8px;">
-        <div class="row">
-            <div class="col-sm-12"><p class="questionModalProtocol"><span class="questionModalNr">10</span> Dorsi Flexão em Cadeia Fechada:</p></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Esq:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dir:</span><input class="form-control"></div></div>
-            <div class="col-sm-4"><div class="input-group"><span class="input-group-addon labelAddon">Dif:</span><input class="form-control" readonly="readonly"></div></div>
-            <div class="col-sm-12"><code>Valor de Referência: Acima de 42°</code></div>
-        </div>
-
-
     </div>
+
 </section>

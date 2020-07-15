@@ -1,4 +1,5 @@
 {% load static %}
+{% load tag_library %}
 
 <section role="main" class="content-body">
     <header class="page-header">
@@ -15,23 +16,139 @@
 
                     <ul class="nav nav-tabs">
 
-                        <li class="active">
-                            <a href="#popular" data-toggle="tab"><i class="fa fa-star"></i> Popular</a>
-                        </li>
+                        {% if paciente|get_protocolos %}
+                            {% for data_exame, exames in protocolos.items %}
+                                <li
+                                    {% if forloop.counter == 1 %}
+                                        class="active"
+                                    {% endif %}>
+                                    <a href="#{{ data_exame|date_replace }}" data-toggle="tab">{{data_exame}}</a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
 
                         <li>
-                            <a href="#recent" data-toggle="tab">Recent</a>
+                            <a href="#novo_protocolo" data-toggle="tab"><i class="fa fa-plus"></i> Novo Protocolo</a>
                         </li>
+
                     </ul>
 
                     <div class="tab-content">
 
-                        <div id="popular" class="tab-pane active">
-                            {% include '../partials/protocolos_view/protocolo_quadro.html' %}
+                        {% if paciente|get_protocolos %}
+                            {% for data_exame, exames in protocolos.items %}
+
+                                <div id="{{data_exame|date_replace}}" class="tab-pane {% if forloop.counter == 1 %} active {% endif %}">
+
+                                    <form action="../protocolo_edit/{{ paciente.id }}/{{ data_exame|date_replace }}" method="POST" id="nameform">
+                                        {% csrf_token %}
+
+                                        {% include '../partials/protocolos_view/protocolo_quadro.html' %}
+
+                                        <div class="summary-footer text-right">
+                                            <button type="submit" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary">Salvar</button>
+                                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalProtocolos_{{ data_exame|date_replace }}">Definir Protocolos</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="modalProtocolos_{{ data_exame|date_replace }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide modal-global">
+                                    <section class="panel">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Selecione os protocolos</h2>
+                                        </header>
+                                        <form action="{{ paciente.id }}" method="POST" id="nameform">
+                                            {% csrf_token %}
+                                            <div class="panel-body">
+                                                <div class="form-group">
+
+                                                    <div class="col-sm-6">
+                                                        {% for protocolo, value in protocolos_nome_col1.items %}
+                                                            <div class="checkbox-custom chekbox-primary">
+                                                                <input type="checkbox" value='{{protocolo}}' name='checks'
+                                                                    {% if protocolo in exames|get_keys %} checked {% endif %}>
+                                                                <label for="for-project">{{value}}</label>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        {% for protocolo, value in protocolos_nome_col2.items %}
+                                                            <div class="checkbox-custom chekbox-primary">
+                                                                <input type="checkbox" value='{{protocolo}}' name='checks'
+                                                                    {% if protocolo in exames|get_keys %} checked {% endif %}>
+                                                                <label for="for-project">{{value}}</label>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <footer class="panel-footer">
+                                            <div class="row">
+                                                <div class="col-md-12 text-right">
+                                                    <button type="submit" form="nameform" class="btn btn-primary">Salvar</button>
+                                                    <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </section>
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+
+                        <div id="novo_protocolo"
+                            {% if not paciente|get_protocolos %}
+                                class="tab-pane active"
+                            {% else %}
+                                class="tab-pane"
+                            {% endif %}>
+                            <p>Adicione protocolos</p>
+                            <div class="summary-footer text-right">
+                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalProtocolos">Definir Protocolos</button>
+                            </div>
                         </div>
 
-                        <div id="recent" class="tab-pane">
-                            <p><p>Ainda não sei o que colocar aqui!!</p>
+                        <div id="modalProtocolos" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide modal-global">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">Selecione os protocolos</h2>
+                                </header>
+                                <form action="{{paciente.id}}" method="POST" id="nameform">
+                                    {% csrf_token %}
+                                    <div class="panel-body">
+                                        <div class="form-group">
+
+                                            <div class="col-sm-6">
+                                                {% for protocolo, value in protocolos_nome_col1.items %}
+                                                    <div class="checkbox-custom chekbox-primary">
+                                                        <input type="checkbox" value='{{protocolo}}' name='checks'>                                <label for="for-project">{{value}}</label>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                {% for protocolo, value in protocolos_nome_col2.items %}
+                                                    <div class="checkbox-custom chekbox-primary">
+                                                        <input type="checkbox" value='{{protocolo}}' name='checks'>                                <label for="for-project">{{value}}</label>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                                <footer class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" form="nameform" class="btn btn-primary">Salvar</button>
+                                            <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </section>
                         </div>
 
                     </div>
@@ -40,6 +157,5 @@
 
     </div>
 
-    <!-- Check protocolos -->
-    {% include '../partials/protocolos_view/protocolo_checkbox.html' %}
+
 </section>
