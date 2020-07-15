@@ -40,7 +40,7 @@
 
                                 <div id="{{data_exame|date_replace}}" class="tab-pane {% if forloop.counter == 1 %} active {% endif %}">
 
-                                    <form action="../protocolo_edit/{{ paciente.id }}/{{ data_exame|date_replace }}" method="POST" id="nameform">
+                                    <form action="../edit_protocolo/{{ paciente.id }}/{{ data_exame|date_replace }}" method="POST" id="nameform">
                                         {% csrf_token %}
 
                                         {% include '../partials/protocolos_view/protocolo_quadro.html' %}

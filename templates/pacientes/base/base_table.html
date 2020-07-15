@@ -31,7 +31,7 @@
                 <tbody>
                     {% for paciente in pacientes %}
                         <tr class="gradeX">
-                            <td><a href="protocolo_view/{{paciente.id}}">{{ paciente }}</a></td>
+                            <td><a href="view_protocolo/{{paciente.id}}">{{ paciente }}</a></td>
                             <td style="text-align: center;">
                                 {% if paciente.genero == 'F' %}
                                     <i class="fa fa-female" style="color: rgb(238, 40, 179);">
@@ -90,6 +90,7 @@
                                 </footer>
                             </section>
                         </div>
+
 
                     {% endfor %}
                 </tbody>

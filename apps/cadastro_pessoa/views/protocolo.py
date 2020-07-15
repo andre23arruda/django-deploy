@@ -53,7 +53,7 @@ def page_protocolo(request, paciente_id):
         return redirect('../usuarios/signin')
 
 
-def page_protocolo_view(request, paciente_id):
+def view_protocolo(request, paciente_id):
     if request.user.is_authenticated:
         # try:
             paciente = get_object_or_404(Paciente, pk = paciente_id)
@@ -87,7 +87,7 @@ def page_protocolo_view(request, paciente_id):
                 }
             }
 
-            return render(request, 'pacientes/pages/page_protocolo_view.html', data)
+            return render(request, 'pacientes/pages/page_view_protocolo.html', data)
 
         # except:
         #     return redirect('table')
@@ -95,7 +95,7 @@ def page_protocolo_view(request, paciente_id):
         return redirect('../usuarios/signin')
 
 
-def protocolo_edit(request, paciente_id, data_exame):
+def edit_protocolo(request, paciente_id, data_exame):
 
     if request.method == 'POST':
         paciente = get_object_or_404(Paciente, pk = paciente_id)
@@ -105,11 +105,28 @@ def protocolo_edit(request, paciente_id, data_exame):
 
         for protocolo in protocolos_exame.keys():
             protocolos[data_exame_replace][protocolo] = request.POST.getlist(data_exame + '_' + protocolo)
-            print('='*30)
-            print(request.POST.getlist(data_exame + '_' + protocolo))
 
+
+        messages.success(request, 'SUCESSO!! Informações adicionadas!,success')
         protocolos = json.dumps(protocolos)
         paciente.protocolos = protocolos
         paciente.save()
 
-    return redirect('../../protocolo_view/' + str(paciente_id))
+    return redirect('../../view_protocolo/' + str(paciente_id))
+
+
+def delete_protocolo(request, paciente_id, data_exame, nome_protocolo):
+
+    paciente = get_object_or_404(Paciente, pk = paciente_id)
+    protocolos = get_protocolos(paciente)
+    data_exame_replace = data_exame.replace('_', '/')
+    protocolos_exame = protocolos[data_exame_replace]
+
+    protocolos[data_exame_replace].pop(nome_protocolo, None)
+
+    messages.success(request, 'Atenção!! Protocolo excluído!,success')
+    protocolos = json.dumps(protocolos)
+    paciente.protocolos = protocolos
+    paciente.save()
+
+    return redirect('../../../view_protocolo/' + str(paciente_id))
