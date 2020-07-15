@@ -59,6 +59,38 @@
                                 <a href="#modalExclude" class="modal-with-move-anim"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
+
+                        <!-- Excluir paciente -->
+                        <div id="modalExclude" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide modal-global">
+                            <section class="panel panel-danger">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">Atenção!</h2>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="modal-wrapper">
+                                        <div class="modal-icon">
+                                            <i class="fa fa-times-circle"></i>
+                                        </div>
+                                        <div class="modal-text">
+                                            <h4>Atenção!</h4>
+                                            <p>Deseja realmente excluir esse paciente da base de dados?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="panel-footer">
+                                    <form action="./delete_paciente/{{paciente.id}}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button class="btn btn-danger" type="submit" id="impCustom">Sim</button>
+                                                <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </footer>
+                            </section>
+                        </div>
+
                     {% endfor %}
                 </tbody>
             </table>
@@ -67,35 +99,3 @@
     <!-- end: page -->
 
 </section>
-
-
-<!-- Excluir paciente -->
-<div id="modalExclude" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide modal-global">
-    <section class="panel panel-danger">
-        <header class="panel-heading">
-            <h2 class="panel-title">Atenção!</h2>
-        </header>
-        <div class="panel-body">
-            <div class="modal-wrapper">
-                <div class="modal-icon">
-                    <i class="fa fa-times-circle"></i>
-                </div>
-                <div class="modal-text">
-                    <h4>Atenção!</h4>
-                    <p>Deseja realmente excluir esse paciente da base de dados?</p>
-                </div>
-            </div>
-        </div>
-        <footer class="panel-footer">
-            <form action="./delete_paciente/{{paciente.id}}" method="POST">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <button class="btn btn-danger" type="submit" id="impCustom">Sim</button>
-                        <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
-                    </div>
-                </div>
-            </form>
-        </footer>
-    </section>
-</div>
