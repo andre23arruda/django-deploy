@@ -13,5 +13,5 @@ urlpatterns = [
     path('form', page_form, name = 'form'),
     path('form_paciente', page_form_paciente, name = 'form_paciente'),
     path('table', page_table, name = 'table'),
-    path('dicom_viewer', dicom_viewer, name = 'dicom_viewer')
+    path('teste', teste, name = 'teste'),
 ]

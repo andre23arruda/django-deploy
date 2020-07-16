@@ -24,7 +24,7 @@
                 <div class="panel-body">
                     <div class="row text-center">
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="circular-bar">
                                 {% with pacientes|lookup:'Finalizado' as concluido %}
                                     {% with pacientes|length as total %}
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="circular-bar">
                                 {% with pacientes|lookup:'Aberto' as aberto %}
                                     {% with pacientes|length as total %}
@@ -50,7 +50,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="circular-bar">
                                 {% with pacientes|lookup:'Em andamento' as andamento %}
                                     {% with pacientes|length as total %}
@@ -63,10 +63,27 @@
                             </div>
                         </div>
 
+                        <!-- Morris: Donut -->
+                        <div class="col-md-3">
+                            <div class="chart chart-md" id="morrisDonut" style="width: 200px; height: 200px;"></div>
+                            <script type="text/javascript">
+
+                                var morrisDonutData = [
+                                    {label: "Aberto", value: {{ pacientes|lookup:'Aberto' }} },
+                                    {label: "Em andamento", value: {{ pacientes|lookup:'Em andamento' }} },
+                                    {label: "Finalizado", value: {{ pacientes|lookup:'Finalizado' }} }
+                                ];
+                                var colorsData = ['#E36159', '#734ba9', '#47a447']
+
+                            </script>
+                        </div>
+
                     </div>
                 </div>
             </section>
         </div>
+
+
 
         <!-- Informações -->
         <div class="col-md-6 col-lg-12 col-xl-6">

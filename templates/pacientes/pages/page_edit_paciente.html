@@ -1,17 +1,17 @@
-{% extends '../../partials/base/base.html' %}
+{% extends '../../partials/base.html' %}
 {% load static %}
 
 {% block body_content %}
     <section class="body">
 
         <!-- start: header -->
-        {% include '../../partials/base/header.html' %}
+        {% include '../../partials/header.html' %}
         <!-- end: header -->
 
 
         <!-- start: content -->
         <div class="inner-wrapper">
-            {% include '../../partials/base/sidebar.html' %}
+            {% include '../../partials/sidebar.html' %}
 
             {% include '../base/base_edit_paciente.html' %}
         </div>
