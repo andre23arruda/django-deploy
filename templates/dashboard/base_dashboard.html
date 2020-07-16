@@ -64,8 +64,8 @@
                         </div>
 
                         <!-- Morris: Donut -->
-                        <div class="col-md-3">
-                            <div class="chart chart-md" id="morrisDonut" style="width: 200px; height: 200px;"></div>
+                        <div class="col-md-3" style="display: flex;">
+                            <div class="chart chart-md" id="morrisDonut" style="width: 200px; height: 200px; margin: auto;"></div>
                             <script type="text/javascript">
 
                                 var morrisDonutData = [
@@ -83,7 +83,38 @@
             </section>
         </div>
 
+        <!-- Gráfico exames x meses -->
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
 
+                    <h2 class="panel-title">Exames realizados por mês</h2>
+                </header>
+                <div class="panel-body">
+
+                    <!-- Morris: Bar -->
+                    <div class="chart chart-md" id="morrisStacked"></div>
+                    <script>
+
+                        var morrisStackedData = [
+                            {% for mes, valor in count_exames.items %}
+                                { y: '{{ mes }}', a: {{ valor }} },
+                            {% endfor %}
+						];
+                        var xkey = 'y'
+                        var ykeys = ['a']
+                        var labels = ['número de exames']
+                        var barColors = ['#0088cc']
+
+                    </script>
+
+                </div>
+            </section>
+        </div>
 
         <!-- Informações -->
         <div class="col-md-6 col-lg-12 col-xl-6">
@@ -120,7 +151,7 @@
                                             </div>
                                         </div>
                                         <div class="summary-footer">
-                                            <a href="/pacientes/table" class="text-muted text-uppercase">(Ver todos)</a>
+                                            <a href="{% url 'tabela_pacientes' %}" class="text-muted text-uppercase">(Ver todos)</a>
                                         </div>
                                     </div>
                                 </div>

@@ -20,7 +20,7 @@ def page_form(request):
     if request.user.is_authenticated:
         return render(request, 'pacientes/pages/page_form.html', data)
     else:
-        return redirect('../usuarios/signin')
+        return redirect('/signin')
 
 
 def page_form_paciente(request):
@@ -65,7 +65,7 @@ def page_form_paciente(request):
                 pacient.save()
                 messages.success(request, 'SUCESSO!! Paciente cadastrado!,success')
 
-                return redirect('table')
+                return redirect('tabela_pacientes')
 
         data = {
             'unidades': Unidade.objects.all(),
@@ -73,7 +73,7 @@ def page_form_paciente(request):
         }
         return render(request, 'pacientes/pages/page_form_paciente.html', data)
     else:
-        return redirect('../usuarios/signin')
+        return redirect('signin')
 
 
 def page_table(request):
@@ -89,7 +89,7 @@ def page_table(request):
         }
         return render(request, 'pacientes/pages/page_table.html', data)
     else:
-        return redirect('../usuarios/signin')
+        return redirect('signin')
 
 
 def delete_paciente(request, paciente_id):
@@ -105,9 +105,9 @@ def delete_paciente(request, paciente_id):
 
         print('Paciente deletado!!')
         messages.error(request, 'Atenção!! Paciente excluído!,error')
-        return redirect('table')
+        return redirect('tabela_pacientes')
     else:
-        return redirect('../usuarios/signin')
+        return redirect('signin')
 
 
 def edit_paciente(request, paciente_id):
@@ -168,7 +168,7 @@ def edit_paciente(request, paciente_id):
 
                 paciente.save()
                 messages.success(request, 'SUCESSO!! Paciente editado!,success')
-                return redirect('table')
+                return redirect('tabela_pacientes')
 
         else:
             data = {
@@ -178,4 +178,4 @@ def edit_paciente(request, paciente_id):
             }
             return render(request, 'pacientes/pages/page_edit_paciente.html', data)
     else:
-        return redirect('../usuarios/signin')
+        return redirect('signin')

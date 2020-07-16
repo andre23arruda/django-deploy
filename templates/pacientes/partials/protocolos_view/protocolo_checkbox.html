@@ -3,7 +3,7 @@
         <header class="panel-heading">
             <h2 class="panel-title">Selecione os protocolos</h2>
         </header>
-        <form action="{{paciente.id}}" method="POST" id="nameform">
+        <form action="{{ paciente.id }}" method="POST" id="nameform">
             {% csrf_token %}
             <div class="panel-body">
                 <div class="form-group">
@@ -11,7 +11,7 @@
                     <div class="col-sm-6">
                         {% for protocolo, value in protocolos_nome_col1.items %}
                             <div class="checkbox-custom chekbox-primary">
-                                <input type="checkbox" value='{{protocolo}}' name='checks'
+                                <input type="checkbox" value='{{ protocolo }}' name='checks'
                                     {% if protocolo in protocolos %} checked {% endif %}>
                                 <label for="for-project">{{value}}</label>
                             </div>
@@ -21,7 +21,7 @@
                     <div class="col-sm-6">
                         {% for protocolo, value in protocolos_nome_col2.items %}
                             <div class="checkbox-custom chekbox-primary">
-                                <input type="checkbox" value='{{protocolo}}' name='checks'
+                                <input type="checkbox" value='{{ protocolo }}' name='checks'
                                     {% if protocolo in protocolos %} checked {% endif %}>
                                 <label for="for-project">{{value}}</label>
                             </div>

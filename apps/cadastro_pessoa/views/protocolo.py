@@ -50,7 +50,7 @@ def page_protocolo(request, paciente_id):
         # except:
         #     return redirect('table')
     else:
-        return redirect('../usuarios/signin')
+        return redirect('signin')
 
 
 def view_protocolo(request, paciente_id):
@@ -92,7 +92,7 @@ def view_protocolo(request, paciente_id):
         # except:
         #     return redirect('table')
     else:
-        return redirect('../usuarios/signin')
+        return redirect('signin')
 
 
 def edit_protocolo(request, paciente_id, data_exame):
@@ -112,7 +112,7 @@ def edit_protocolo(request, paciente_id, data_exame):
         paciente.protocolos = protocolos
         paciente.save()
 
-    return redirect('../../view_protocolo/' + str(paciente_id))
+    return redirect('view_protocolo')
 
 
 def delete_protocolo(request, paciente_id, data_exame, nome_protocolo):
@@ -129,4 +129,4 @@ def delete_protocolo(request, paciente_id, data_exame, nome_protocolo):
     paciente.protocolos = protocolos
     paciente.save()
 
-    return redirect('../../../view_protocolo/' + str(paciente_id))
+    return redirect('view_protocolo')
