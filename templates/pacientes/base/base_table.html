@@ -34,7 +34,7 @@
                             <td>{{ paciente }}</td>
                             <td style="text-align: center;">
                                 {% if paciente.genero == 'F' %}
-                                    <i class="fa fa-female" style="color: rgb(238, 40, 179);">
+                                    <i class="fa fa-female text-pink">
                                 {% else %}
                                     <i class="fa fa-male text-primary">
                                 {% endif %}
@@ -44,14 +44,11 @@
                             <td>{{ paciente.data_nascimento|age }}</td>
                             <td>{{ paciente.unidade }}</td>
                             <td>{{ paciente.responsavel }}</td>
-                            <td>
-                                {% if paciente.status == 'Em andamento' %}
-                                    <i class="fa fa-circle text-primary"></i>
-                                {% elif paciente.status == 'Aberto' %}
-                                    <i class="fa fa-circle text-default"></i>
-                                {% else %}
-                                    <i class="fa fa-circle text-success"></i>
-                                {% endif %}
+                            <td> <i class="fa fa-circle
+                                {% if paciente.status == 'Em andamento' %} text-primary
+                                {% elif paciente.status == 'Aberto' %} text-default
+                                {% else %} text-success
+                                {% endif %}"></i>
                                 &nbsp; {{ paciente.status }}
                             </td>
                             <td class="actions-hover actions-fade">

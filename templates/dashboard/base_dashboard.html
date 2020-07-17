@@ -136,7 +136,7 @@
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
                         <section class="panel panel-featured-left panel-featured-primary">
-                            <div class="panel-body">
+                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
                                 <div class="widget-summary">
                                     <div class="widget-summary-col widget-summary-col-icon">
                                         <div class="summary-icon bg-primary">
@@ -145,8 +145,8 @@
                                     </div>
                                     <div class="widget-summary-col">
                                         <div class="summary">
-                                            <h4 class="title">Número de pacientes</h4>
-                                            <div class="info">
+                                            <h4 class="title text-left">Número de pacientes</h4>
+                                            <div class="info text-left">
                                                 <strong class="amount">{{ pacientes|length }}</strong>
                                             </div>
                                         </div>
@@ -155,13 +155,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </section>
                     </div>
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
                         <section class="panel panel-featured-left panel-featured-secondary">
-                            <div class="panel-body">
+                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
                                 <div class="widget-summary">
                                     <div class="widget-summary-col widget-summary-col-icon">
                                         <div class="summary-icon bg-secondary">
@@ -170,8 +170,8 @@
                                     </div>
                                     <div class="widget-summary-col">
                                         <div class="summary">
-                                            <h4 class="title">Protocolos em aberto</h4>
-                                            <div class="info">
+                                            <h4 class="title text-left">Protocolos em aberto</h4>
+                                            <div class="info text-left">
                                                 <strong class="amount">{{ pacientes|lookup:'Aberto' }}</strong>
                                             </div>
                                         </div>
@@ -180,13 +180,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </section>
                     </div>
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
                         <section class="panel panel-featured-left panel-featured-tertiary">
-                            <div class="panel-body">
+                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
                                 <div class="widget-summary">
                                     <div class="widget-summary-col widget-summary-col-icon">
                                         <div class="summary-icon bg-tertiary">
@@ -195,8 +195,8 @@
                                     </div>
                                     <div class="widget-summary-col">
                                         <div class="summary">
-                                            <h4 class="title">Usuários cadastrados</h4>
-                                            <div class="info">
+                                            <h4 class="title text-left">Usuários cadastrados</h4>
+                                            <div class="info text-left">
                                                 <strong class="amount">{{ usuarios|length }}</strong>
                                             </div>
                                         </div>
@@ -205,13 +205,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </section>
                     </div>
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
                         <section class="panel panel-featured-left panel-featured-quartenary">
-                            <div class="panel-body">
+                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
                                 <div class="widget-summary">
                                     <div class="widget-summary-col widget-summary-col-icon">
                                         <div class="summary-icon bg-quartenary">
@@ -220,8 +220,8 @@
                                     </div>
                                     <div class="widget-summary-col">
                                         <div class="summary">
-                                            <h4 class="title">Protocolos em andamento</h4>
-                                            <div class="info">
+                                            <h4 class="title text-left">Protocolos em andamento</h4>
+                                            <div class="info text-left">
                                                 <strong class="amount">{{ pacientes|lookup:'Em andamento' }}</strong>
                                             </div>
                                         </div>
@@ -230,13 +230,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </section>
                     </div>
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
-                        <section class="panel panel-featured-left panel-featured-tertiary">
-                            <div class="panel-body">
+                        <section class="panel panel-featured-left panel-featured-dark">
+                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
                                 <div class="widget-summary">
                                     <div class="widget-summary-col widget-summary-col-icon">
                                         <div class="summary-icon bg-dark">
@@ -245,8 +245,8 @@
                                     </div>
                                     <div class="widget-summary-col">
                                         <div class="summary">
-                                            <h4 class="title">Responsáveis cadastrados</h4>
-                                            <div class="info">
+                                            <h4 class="title text-left">Responsáveis cadastrados</h4>
+                                            <div class="info text-left">
                                                 <strong class="amount">{{ responsaveis|length }}</strong>
                                             </div>
                                         </div>
@@ -255,13 +255,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </section>
                     </div>
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
-                        <section class="panel panel-featured-left panel-featured-quartenary">
-                            <div class="panel-body">
+                        <section class="panel panel-featured-left panel-featured-success">
+                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
                                 <div class="widget-summary">
                                     <div class="widget-summary-col widget-summary-col-icon">
                                         <div class="summary-icon bg-success">
@@ -270,8 +270,8 @@
                                     </div>
                                     <div class="widget-summary-col">
                                         <div class="summary">
-                                            <h4 class="title">Protocolos finalizados</h4>
-                                            <div class="info">
+                                            <h4 class="title text-left">Protocolos finalizados</h4>
+                                            <div class="info text-left">
                                                 <strong class="amount">{{ pacientes|lookup:'Finalizado' }}</strong>
                                             </div>
                                         </div>
@@ -280,7 +280,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </section>
                     </div>
 

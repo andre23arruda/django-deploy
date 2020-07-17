@@ -1151,6 +1151,9 @@ mark,
 .text-primary {
   color: #428bca;
 }
+.text-pink {
+  color: #cc19c3;
+}
 a.text-primary:hover {
   color: #3071a9;
 }
