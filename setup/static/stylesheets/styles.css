@@ -41,3 +41,14 @@
     75% { height: 100%;}
     100% { height: 0%;}
 }
+
+.header-tabela-pacientes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+.table-tabela-pacientes {
+    border: 2px solid rgba(214, 214, 214, 0.199)
+}
