@@ -19,7 +19,7 @@
                         {% if paciente|get_protocolos %}
                             {% for data_exame, exames in protocolos.items %}
                                 <li
-                                    {% if forloop.counter == 1 %}
+                                    {% if forloop.counter ==  paciente|get_protocolos|length %}
                                         class="active"
                                     {% endif %}>
                                     <a href="#{{ data_exame|date_replace }}" data-toggle="tab">{{data_exame}}</a>
@@ -40,7 +40,7 @@
 
                                 <div id="{{data_exame|date_replace}}" class="tab-pane {% if forloop.counter == 1 %} active {% endif %}">
 
-                                    <form action="../edit_protocolo/{{ paciente.id }}/{{ data_exame|date_replace }}" method="POST" id="nameform">
+                                    <form action="../edit_protocolo/{{ paciente.id }}/{{ data_exame|date_replace }}" method="POST">
                                         {% csrf_token %}
 
                                         {% include '../partials/protocolos_view/protocolo_quadro.html' %}
@@ -57,7 +57,7 @@
                                         <header class="panel-heading">
                                             <h2 class="panel-title">Selecione os protocolos</h2>
                                         </header>
-                                        <form action="{{ paciente.id }}" method="POST" id="nameform">
+                                        <form action="{{ paciente.id }}" method="POST">
                                             {% csrf_token %}
                                             <div class="panel-body">
                                                 <div class="form-group">
@@ -88,7 +88,7 @@
                                         <footer class="panel-footer">
                                             <div class="row">
                                                 <div class="col-md-12 text-right">
-                                                    <button type="submit" form="nameform" class="btn btn-primary">Salvar</button>
+                                                    <button type="submit" class="btn btn-primary">Salvar</button>
                                                     <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@
                                 <header class="panel-heading">
                                     <h2 class="panel-title">Selecione os protocolos</h2>
                                 </header>
-                                <form action="{{ paciente.id }}" method="POST" id="nameform">
+                                <form action="{{ paciente.id }}" method="POST">
                                     {% csrf_token %}
                                     <div class="panel-body">
                                         <div class="form-group">
@@ -143,7 +143,7 @@
                                 <footer class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-12 text-right">
-                                            <button type="submit" form="nameform" class="btn btn-primary">Salvar</button>
+                                            <button type="submit" class="btn btn-primary">Salvar</button>
                                             <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
                                         </div>
                                     </div>

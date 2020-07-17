@@ -3,7 +3,7 @@
         <header class="panel-heading">
             <h2 class="panel-title">Selecione os protocolos</h2>
         </header>
-        <form action="{{ paciente.id }}" method="POST" id="nameform">
+        <form action="{{ paciente.id }}" method="POST">
             {% csrf_token %}
             <div class="panel-body">
                 <div class="form-group">
@@ -31,7 +31,7 @@
         <footer class="panel-footer">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button type="submit" form="nameform" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
                     <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
                 </div>
             </div>

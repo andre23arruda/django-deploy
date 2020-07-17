@@ -4,7 +4,7 @@
     <header class="panel-heading panel-collapse collapse in">
         <div class="panel-actions">
             <a href="#" class="fa fa-caret-up"></a>
-            <a href="../delete_protocolo/{{paciente.id}}/{{data_exame|date_replace}}/lombar"><i class="fa fa-times"></i></a>
+            <a href="#exclude_{{ protocolo }}" class="modal-with-move-anim"><i class="fa fa-times"></i></a>
         </div>
         <div class="widget-summary widget-summary-sm">
             <div class="widget-summary-col widget-summary-col-icon">
@@ -42,3 +42,5 @@
     </div>
 
 </section>
+
+{% include '../delete_protocolo.html' %}

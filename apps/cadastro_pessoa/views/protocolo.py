@@ -112,21 +112,24 @@ def edit_protocolo(request, paciente_id, data_exame):
         paciente.protocolos = protocolos
         paciente.save()
 
-    return redirect('view_protocolo')
+    return redirect('view_protocolo', paciente_id=paciente_id)
 
 
 def delete_protocolo(request, paciente_id, data_exame, nome_protocolo):
 
-    paciente = get_object_or_404(Paciente, pk = paciente_id)
-    protocolos = get_protocolos(paciente)
-    data_exame_replace = data_exame.replace('_', '/')
-    protocolos_exame = protocolos[data_exame_replace]
+    if request.user.is_authenticated:
+        paciente = get_object_or_404(Paciente, pk = paciente_id)
+        protocolos = get_protocolos(paciente)
+        data_exame_replace = data_exame.replace('_', '/')
+        protocolos_exame = protocolos[data_exame_replace]
 
-    protocolos[data_exame_replace].pop(nome_protocolo, None)
+        protocolos[data_exame_replace].pop(nome_protocolo, None)
 
-    messages.success(request, 'Atenção!! Protocolo excluído!,success')
-    protocolos = json.dumps(protocolos)
-    paciente.protocolos = protocolos
-    paciente.save()
+        messages.success(request, 'Atenção!! Protocolo excluído!,warning')
+        protocolos = json.dumps(protocolos)
+        paciente.protocolos = protocolos
+        paciente.save()
 
-    return redirect('view_protocolo')
+        return redirect('view_protocolo', paciente_id=paciente_id)
+
+    return redirect('signin')
