@@ -16,9 +16,10 @@
     <section class="panel">
 
         <div class="panel-body">
-            <table class="table table-striped mb-none" style="border: 2px solid rgba(214, 214, 214, 0.199);" id="datatable-tabletools" data-swf-path="assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
+            <table class="table table-hover mb-none" style="border: 2px solid rgba(214, 214, 214, 0.199);" id="datatable-tabletools" data-swf-path="assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
                 <thead>
                     <tr>
+                        <th> ID </th>
                         <th> Paciente </th>
                         <th style="text-align: center;"> Gênero </th>
                         <th> Idade </th>
@@ -30,7 +31,8 @@
                 </thead>
                 <tbody>
                     {% for paciente in pacientes %}
-                        <tr class="gradeX">
+                        <tr onclick="location.href='view_protocolo/{{paciente.id}}';" style="cursor: pointer;">
+                            <td>{{ paciente.id }}</td>
                             <td>{{ paciente }}</td>
                             <td style="text-align: center;">
                                 {% if paciente.genero == 'F' %}
@@ -52,7 +54,6 @@
                                 &nbsp; {{ paciente.status }}
                             </td>
                             <td class="actions-hover actions-fade">
-                                <a href="view_protocolo/{{paciente.id}}"><i class="fa fa-eye"></i></a>
                                 <a href="./edit_paciente/{{paciente.id}}"><i class="fa fa-pencil"></i></a>
                                 <a href="#modalExclude" class="modal-with-move-anim"><i class="fa fa-trash-o"></i></a>
                             </td>

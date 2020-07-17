@@ -136,26 +136,27 @@
 
                     <div class="col-md-12 col-lg-6 col-xl-6">
                         <section class="panel panel-featured-left panel-featured-primary">
-                            <button class="btn btn-default panel-body" style="width: 100%; border: none;">
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col widget-summary-col-icon">
-                                        <div class="summary-icon bg-primary">
-                                            <i class="fa fa-group"></i>
-                                        </div>
-                                    </div>
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <h4 class="title text-left">Número de pacientes</h4>
-                                            <div class="info text-left">
-                                                <strong class="amount">{{ pacientes|length }}</strong>
+                                <button class="btn btn-default panel-body" style="width: 100%; border: none;" onclick="location.href='table';">
+                                    <div class="widget-summary">
+                                        <div class="widget-summary-col widget-summary-col-icon">
+                                            <div class="summary-icon bg-primary">
+                                                <i class="fa fa-group"></i>
                                             </div>
                                         </div>
-                                        <div class="summary-footer">
-                                            <a href="{% url 'tabela_pacientes' %}" class="text-muted text-uppercase">(Ver todos)</a>
+                                        <div class="widget-summary-col">
+                                            <div class="summary">
+                                                <h4 class="title text-left">Número de pacientes</h4>
+                                                <div class="info text-left">
+                                                    <strong class="amount">{{ pacientes|length }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="summary-footer">
+                                                <a class="text-muted text-uppercase"><br></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
+                                </button>
+
                         </section>
                     </div>
 
