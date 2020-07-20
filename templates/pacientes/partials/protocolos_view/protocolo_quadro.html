@@ -4,6 +4,5 @@
 {% for protocolo, value in exames.items %}
 
     {% include "./tipos_protocolos/protocolo_"|add:protocolo|add:".html" %}
-    {% include './delete_protocolo.html' %}
 
 {% endfor %}

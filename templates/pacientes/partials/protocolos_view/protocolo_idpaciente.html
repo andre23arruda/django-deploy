@@ -1,3 +1,5 @@
+{% load tag_library %}
+
 <!-- Identificação do paciente -->
 <div class="col-md-12 col-lg-12"></div>
     <section class="panel panel-featured-top panel-featured-quartenary">
@@ -5,7 +7,7 @@
             <div class="widget-summary">
                 <div class="widget-summary-col widget-summary-col-icon">
                     {% if paciente.path_imagem %}
-                        <img src="{{ paciente.path_imagem.url }}" width="95px" height="95px" style="border-radius: 50px; margin-right: 15px;">
+                        <img src="{{ paciente.path_imagem|get_media }}" width="95px" height="95px" style="border-radius: 50px; margin-right: 15px;">
                     {% else %}
                     <div class="summary-icon bg-quartenary">
                         <i class="fa fa-user"></i>
@@ -93,11 +95,11 @@
             </div>
         </div>
         <footer class="panel-footer">
-            <form action="../delete_paciente/{{ paciente.id }}" method="POST">
+            <form action="{% url 'delete_paciente' paciente_id=paciente.id %}" method="POST">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button class="btn btn-danger" type="submit" id="impCustom">Sim</button>
+                        <button class="btn btn-danger" type="submit">Sim</button>
                         <button class="btn btn-default modal-dismiss modal-close">Cancelar</button>
                     </div>
                 </div>

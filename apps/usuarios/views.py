@@ -22,7 +22,7 @@ def page_signin(request):
             if user is not None:
                 login(request, user)
                 print('Login realizado com sucesso')
-                return redirect('../pacientes/table')
+                return redirect('tabela_pacientes')
             messages.error(request, 'ERRO!! Senha errada!,error')
 
         return redirect('signin')

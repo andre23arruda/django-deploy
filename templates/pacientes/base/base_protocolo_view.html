@@ -50,6 +50,8 @@
                                             <button type="button" class="mb-xs mt-xs mr-xs btn btn-xs btn-primary modal-with-move-anim" href="#modalProtocolos_{{ data_exame|date_replace }}">Definir Protocolos</button>
                                         </div>
                                     </form>
+
+                                    {% include '../partials/protocolos_view/delete_protocolo.html' %}
                                 </div>
 
                                 <div id="modalProtocolos_{{ data_exame|date_replace }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide modal-global">

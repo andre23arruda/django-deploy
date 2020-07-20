@@ -5,7 +5,7 @@
 <section role="main" class="content-body">
     <header class="page-header header-tabela-pacientes">
         <h2>Lista de pacientes</h2>
-        <a href="./form_paciente" class="btn btn-primary"  style="max-height: 34px; margin-right: 30px; text-align: center;">
+        <a href="./create_paciente" class="btn btn-primary"  style="max-height: 34px; margin-right: 30px; text-align: center;">
             <p style="font-size:3hw; overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap">Adicionar paciente <b>+</b></p>
@@ -31,9 +31,9 @@
                 </thead>
                 <tbody>
                     {% for paciente in pacientes %}
-                        <tr onclick="location.href='view_protocolo/{{paciente.id}}';" style="cursor: pointer;">
-                            <td>{{ paciente.id }}</td>
-                            <td>{{ paciente }}</td>
+                        <tr>
+                            <td onclick="view_protocolo({{ paciente.id }})" style="cursor: pointer;">{{ paciente.id }}</td>
+                            <td onclick="view_protocolo({{ paciente.id }})" style="cursor: pointer;">{{ paciente }}</td>
                             <td style="text-align: center;">
                                 {% if paciente.genero == 'F' %}
                                     <i class="fa fa-female text-pink">
@@ -43,10 +43,10 @@
                                         <p hidden>{{ paciente.genero }}</p>
                                     </i>
                             </td>
-                            <td>{{ paciente.data_nascimento|age }}</td>
-                            <td>{{ paciente.unidade }}</td>
-                            <td>{{ paciente.responsavel }}</td>
-                            <td> <i class="fa fa-circle
+                            <td onclick="view_protocolo({{ paciente.id }})" style="cursor: pointer;">{{ paciente.data_nascimento|age }}</td>
+                            <td onclick="view_protocolo({{ paciente.id }})" style="cursor: pointer;">{{ paciente.unidade }}</td>
+                            <td onclick="view_protocolo({{ paciente.id }})" style="cursor: pointer;">{{ paciente.responsavel }}</td>
+                            <td onclick="view_protocolo({{ paciente.id }})" style="cursor: pointer;"> <i class="fa fa-circle
                                 {% if paciente.status == 'Em andamento' %} text-primary
                                 {% elif paciente.status == 'Aberto' %} text-default
                                 {% else %} text-success
@@ -55,12 +55,12 @@
                             </td>
                             <td class="actions-hover actions-fade">
                                 <a href="./edit_paciente/{{paciente.id}}"><i class="fa fa-pencil"></i></a>
-                                <a href="#modalExclude" class="modal-with-move-anim"><i class="fa fa-trash-o"></i></a>
+                                <a href="#modalExclude_{{ paciente.id }}" class="modal-with-move-anim"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
 
                         <!-- Excluir paciente -->
-                        <div id="modalExclude" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide modal-global">
+                        <div id="modalExclude_{{ paciente.id}}" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide modal-global">
                             <section class="panel panel-danger">
                                 <header class="panel-heading">
                                     <h2 class="panel-title">Atenção!</h2>
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="modal-text">
                                             <h4>Atenção!</h4>
-                                            <p>Deseja realmente excluir esse paciente da base de dados?</p>
+                                            <p>Deseja realmente excluir o paciente <strong>{{ paciente }}</strong> da base de dados?</p>
                                         </div>
                                     </div>
                                 </div>

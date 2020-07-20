@@ -68,7 +68,8 @@ class Paciente(models.Model):
     status = models.CharField(max_length=20, choices=STATUS)
     genero = models.CharField(max_length=1, choices=GENDER)
     protocolos = models.TextField(default='{}')
-    path_imagem = models.ImageField(upload_to=f'images/{datetime.now().strftime("%m/%d/%Y")}', blank=True)
+    path_imagem = models.TextField()
+    uuid_paciente = models.TextField()
 
     def __str__(self):
         return  f'{self.nome} {self.sobrenome}'

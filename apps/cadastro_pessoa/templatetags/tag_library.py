@@ -49,6 +49,12 @@ def get_protocolos(paciente):
     protocolos = json.loads(text)
     return protocolos
 
+# @register.filter(name='get_protocolos')
+# def get_protocolos(paciente):
+#     path_file = paciente.protocolos
+#     with open(path_file) as json_file:
+#         protocolos = json.load(json_file)
+#     return protocolos
 
 @register.filter(name='get_keys')
 def get_keys(value):
@@ -58,3 +64,9 @@ def get_keys(value):
 @register.filter(name='get_index_value')
 def get_index_value(value, element):
     return value[element]
+
+
+@register.filter(name='get_media')
+def get_media(value):
+    list_string = value.split('media')
+    return '\media' + list_string[1]

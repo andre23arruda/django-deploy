@@ -129,9 +129,7 @@
                                             <i class="fa fa-file fileupload-exists"></i>
                                             <span class="fileupload-preview">
                                                 <input type="text" id="path_imagem_exists" name='path_imagem_exists' value="{{paciente.path_imagem}}" hidden>
-                                                {% if paciente.path_imagem %}
-                                                    <i class="fa fa-file"></i> &nbsp;&nbsp;&nbsp; {{ paciente.path_imagem.url }}
-                                                {% endif %}
+                                                {{ paciente.path_imagem|get_media }}
                                             </span>
                                         </div>
 
@@ -141,11 +139,9 @@
                                         </span>
                                         <a class="btn btn-default" data-dismiss="fileupload">Remover</a>
 
-                                        {% if paciente.path_imagem %}
-                                            <div class="fileupload-preview">
-                                                <img src="{{ paciente.path_imagem.url }}" width="100px">
-                                            </div>
-                                        {% endif %}
+                                        <div class="fileupload-preview">
+                                            <img src="{{ paciente.path_imagem|get_media }}" width="100px">
+                                        </div>
 
                                     </div>
                                 </div>
