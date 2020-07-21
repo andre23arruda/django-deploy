@@ -4,7 +4,7 @@ from cadastro_pessoa.models import Cliente, Paciente, Responsavel, Unidade
 from django.contrib import messages
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 
 import os, uuid, io
 from datetime import datetime
