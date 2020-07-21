@@ -289,4 +289,7 @@ def print_paciente(request, paciente_id):
     doc.build(Story)
 
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='report.pdf')
+    return HttpResponse(buffer, content_type='application/pdf')
+
+    # buffer.seek(0)
+    # return FileResponse(buffer, as_attachment=True, filename='report.pdf')
