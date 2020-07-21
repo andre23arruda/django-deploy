@@ -42,7 +42,7 @@ def create_paciente(request):
             data_nascimento =  datetime.strptime(request.POST['data_nascimento'], "%d/%m/%Y").strftime("%Y-%m-%d")
             data_cadastro = datetime.now().strftime("%Y-%m-%d")
             phone = request.POST['phone']
-            massa = request.POST['massa']
+            massa = request.POST['massa'].replace(',', '.')
             estatura = request.POST['estatura']
             unidade = request.POST['unidade']
             responsavel = request.POST['responsavel']
@@ -77,7 +77,7 @@ def create_paciente(request):
                     data_nascimento = data_nascimento,
                     data_cadastro = data_cadastro,
                     telefone = phone,
-                    massa_corporal = massa,
+                    massa_corporal = 0.1 * float(massa),
                     estatura = estatura,
                     unidade = Unidade.objects.get(cidade = unidade),
                     responsavel = Responsavel.objects.get(nome = responsavel),
@@ -144,12 +144,14 @@ def edit_paciente(request, paciente_id):
             email = request.POST['email']
             data_nascimento =  datetime.strptime(request.POST['data_nascimento'], "%d/%m/%Y").strftime("%Y-%m-%d")
             phone = request.POST['phone']
-            massa = request.POST['massa']
+            massa = request.POST['massa'].replace(',', '.')
             estatura = request.POST['estatura']
             unidade = request.POST['unidade']
             responsavel = request.POST['responsavel']
             status = request.POST['status']
             genero = request.POST['genero']
+
+            print(float(massa))
 
             change = 0
             try:
@@ -175,7 +177,7 @@ def edit_paciente(request, paciente_id):
                 paciente.email = email
                 paciente.data_nascimento = data_nascimento
                 paciente.telefone = phone
-                paciente.massa_corporal = massa
+                paciente.massa_corporal = 0.1 * float(massa)
                 paciente.estatura = estatura
                 paciente.unidade = Unidade.objects.get(cidade=unidade)
                 paciente.responsavel = Responsavel.objects.get(nome=responsavel)
