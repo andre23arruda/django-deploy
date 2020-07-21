@@ -12,5 +12,6 @@ urlpatterns = [
     path('form', page_form, name = 'form'),
     path('create_paciente',create_paciente, name = 'create_paciente'),
     path('tabela_pacientes', tabela_pacientes, name = 'tabela_pacientes'),
-    path('teste', teste, name = 'teste'),
+    path('print_paciente/<int:paciente_id>', print_paciente, name = 'print_paciente'),
+    path('teste/<int:paciente_id>', teste, name = 'teste'),
 ]

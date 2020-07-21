@@ -54,7 +54,8 @@
                                 &nbsp; {{ paciente.status }}
                             </td>
                             <td class="actions-hover actions-fade">
-                                <a href="./edit_paciente/{{paciente.id}}"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'edit_paciente' paciente_id=paciente.id %}"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'print_paciente' paciente_id=paciente.id %}"><i class="fa fa-print"></i></a>
                                 <a href="#modalExclude_{{ paciente.id }}" class="modal-with-move-anim"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>

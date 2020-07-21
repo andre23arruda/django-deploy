@@ -25,12 +25,19 @@ def lookup(pacientes, status):
 @register.filter(name='percent')
 def percent(value, arg):
     "Multiplies the arg and the value"
-    return 100 * (int(value)/int(arg))
+    if value:
+        return 100 * (int(value)/int(arg))
+    return 0
 
 
 @register.filter(name='date2template')
 def date2template(value):
     return value.strftime("%d/%m/%Y")
+
+
+@register.filter(name='today')
+def today(value):
+    return datetime.now().strftime("%d/%m/%Y")
 
 
 @register.filter(name='date_replace')
@@ -69,4 +76,10 @@ def get_index_value(value, element):
 @register.filter(name='get_media')
 def get_media(value):
     list_string = value.split('media')
+    return '\media' + list_string[1]
+
+
+@register.filter(name='teste')
+def teste(user):
+    list_string = (user.profile.path_imagem).split('media')
     return '\media' + list_string[1]

@@ -1,4 +1,6 @@
 {% load static %}
+{% load tag_library %}
+
 <!-- start: header -->
 <header class="header">
     <div class="logo-container">
@@ -18,7 +20,12 @@
         <div id="userbox" class="userbox">
             <a href="#" data-toggle="dropdown">
                 <figure class="profile-picture">
-                    <img src="{% static 'images/andre_spider.png' %}" alt="{{ user.username }}" class="img-circle" data-lock-picture="{% static 'images/andre_spider.png' %}" />
+                    {% if user.profile.path_imagem %}
+                        <img src="{{ user.profile.path_imagem|get_media }}" alt="{{ user.username }}" class="img-circle" />
+                    {% else %}
+                        <i class="fa fa-user"></i>
+                    {% endif %}
+
                 </figure>
                 <div class="profile-info" data-lock-name="{{ user.username }}" data-lock-email="{{ user.email }}">
                     <span class="name">{{ user.username }}</span>
@@ -38,5 +45,6 @@
         </div>
     </div>
     <!-- end: search & user box -->
+
 </header>
 <!-- end: header -->

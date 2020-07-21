@@ -1,14 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from cadastro_pessoa.models import Cliente, Paciente, Responsavel, Unidade
-from datetime import datetime
 from django.contrib import messages
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.http import FileResponse
 
-import os, uuid
+import os, uuid, io
+from datetime import datetime
 from shutil import copyfile, rmtree
 from cadastro_pessoa.src import validate_fields, pacient_exists
+
+from reportlab.pdfgen import canvas
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+
 
 nome_empresa = 'BIOCINETICA'
 
@@ -213,3 +221,70 @@ def create_folder(uuid_paciente):
     if not(os.path.exists(path_paciente)):
         os.mkdir(path_paciente)
     return path_paciente
+
+
+def print_paciente(request, paciente_id):
+
+    paciente = get_object_or_404(Paciente, pk = paciente_id)
+
+    buffer = io.BytesIO()
+
+    doc = SimpleDocTemplate(buffer,
+                            rightMargin=72,leftMargin=72,
+                            topMargin=72,bottomMargin=18)
+    doc.title = f'report_{paciente.uuid_paciente}'
+    Story=[]
+    logo = paciente.path_imagem
+    styles=getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+
+    im = Image(logo, 1*inch, 1*inch)
+    im.hAlign = 'RIGHT'
+    Story.append(im)
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">UUID: { paciente.uuid_paciente }</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Paciente: { paciente }</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Data de nascimento: { paciente.data_nascimento.strftime("%d/%m/%Y") }</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Gênero: { paciente.genero }</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Altura: { paciente.estatura }cm</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Massa corporal: { paciente.massa_corporal }kg</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Reponsável: { paciente.responsavel.nome }</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Unidade: { paciente.unidade }</font>'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = f'<font size="12">Status: { paciente.status }</font>'
+    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Spacer(1, 48))
+
+    ptext = '<font size="12">Harpia Health Solutions</font>'
+    ptext_style = styles['Heading1']
+    ptext_style.alignment = 1
+    Story.append(Paragraph(ptext, ptext_style))
+    Story.append(Spacer(1, 12))
+    doc.build(Story)
+
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='report.pdf')

@@ -9,7 +9,7 @@
 		<div class="center-sign">
 
 			<a href="/" class="logo pull-left">
-				<img src="{% static 'images/logo_harpia.png' %}" height="54" alt="Porto Admin" />
+				<img src="{% static 'images/logo_harpia.png' %}" height="54" alt="Harpia admin" />
 			</a>
 
 			<div class="panel panel-sign">
@@ -17,7 +17,7 @@
 					<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Cadastrar</h2>
 				</div>
 				<div class="panel-body">
-					<form action="{% url 'signup' %}" method="POST">
+					<form enctype="multipart/form-data" action="{% url 'signup' %}" method="POST">
 						{% csrf_token %}
 						<div class="form-group mb-lg">
 							<label>Usuário</label>
@@ -42,6 +42,24 @@
 							</div>
 						</div>
 
+						<div class="form-group mb-lg">
+                            <label>Foto</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
+                                    <div class="input-append">
+                                        <div class="uneditable-input" style="width: 50%;">
+                                            <i class="fa fa-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-exists">Trocar</span>
+                                            <span class="fileupload-new">Selecionar imagem</span>
+                                            <input type="file" name='path_file'>
+                                        </span>
+                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
+                                    </div>
+                                </div>
+                        </div>
+
 						<div class="col-sm-14">
 							<script src='https://www.google.com/recaptcha/api.js'></script>
 							<label>Verificação de segurança</label>
@@ -65,7 +83,7 @@
 							<span>OU</span>
 						</span>
 
-						<div class="mb-xs text-center">
+						<div class="mb-xs text-center" hidden>
 							<a class="btn btn-facebook mb-md ml-xs mr-xs">Conectar com <i class="fa fa-facebook"></i></a>
 							<a class="btn btn-twitter mb-md ml-xs mr-xs">Conectar com <i class="fa fa-twitter"></i></a>
 						</div>

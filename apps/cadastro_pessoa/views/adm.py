@@ -4,10 +4,10 @@ from cadastro_pessoa.models import Cliente, Paciente, Responsavel, Unidade
 from datetime import datetime
 from django.contrib import messages
 from django.conf import settings
+from django.http import FileResponse
 
 import os
 import json
-
 
 def dashboard(request):
     if request.user.is_authenticated:
@@ -23,7 +23,6 @@ def dashboard(request):
         count_exames = {}
         for mes, mes_numero in meses.items():
             count_exames[mes] = len(pacientes.filter(protocolos__icontains='/'.join([mes_numero, ano_atual])))
-        print(count_exames)
 
         data = {
             'pacientes': pacientes,

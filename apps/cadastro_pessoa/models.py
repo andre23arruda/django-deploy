@@ -61,7 +61,7 @@ class Paciente(models.Model):
     data_nascimento = models.DateField(blank=False)
     data_cadastro = models.DateField(blank=False)
     telefone = models.CharField(max_length=20)
-    massa_corporal = models.IntegerField()
+    massa_corporal = models.FloatField()
     estatura = models.IntegerField()
     unidade = models.ForeignKey(Unidade, on_delete=models.CASCADE)
     responsavel = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
