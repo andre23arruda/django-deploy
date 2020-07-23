@@ -19,9 +19,9 @@ RECAPTCHA_SITE_KEY = KEYS['RECAPTCHA_SITE_KEY']
 RECAPTCHA_SECRET_KEY = KEYS['RECAPTCHA_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = KEYS['DEBUG'],
+DEBUG = KEYS['DEBUG']
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = KEYS['ALLOWED_HOSTS']
 
 
 # Application definition
@@ -75,11 +75,8 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': KEYS['ENGINE'],
-        'NAME': KEYS['NAME'],
-        'USER': KEYS['USER'],
-        'PASSWORD': KEYS['PASSWORD'],
-        'HOST': KEYS['HOST']
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
@@ -139,7 +136,9 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, '../apps'))
 
 # Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = KEYS['MEDIA_ROOT']
+# MEDIA_URL = '/media/'
+MEDIA_URL = KEYS['MEDIA_ROOT']
 
 ## Email
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
