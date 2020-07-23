@@ -4,7 +4,7 @@ from cadastro_pessoa.models import Cliente, Paciente, Responsavel, Unidade
 from django.contrib import messages
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse
 
 import os, uuid, io
 from datetime import datetime
@@ -151,8 +151,6 @@ def edit_paciente(request, paciente_id):
             status = request.POST['status']
             genero = request.POST['genero']
 
-            print(float(massa))
-
             change = 0
             try:
                 path_imagem = request.FILES['path_imagem']
@@ -289,7 +287,4 @@ def print_paciente(request, paciente_id):
     doc.build(Story)
 
     buffer.seek(0)
-    return HttpResponse(buffer, content_type='application/pdf')
-
-    # buffer.seek(0)
-    # return FileResponse(buffer, as_attachment=True, filename='report.pdf')
+    return FileResponse(buffer, as_attachment=True, filename='report.pdf')

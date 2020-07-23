@@ -72,7 +72,7 @@
                             <label class="col-md-3 control-label">Massa Corporal</label>
                             <div class="col-md-6">
                                 <div class="mt-lg mb-lg slider-primary" data-plugin-slider data-plugin-options='{ "value": 500, "range": "min", "max": 2000 }' data-plugin-slider-output="#listenSlider">
-                                    <input name="massa" id="listenSlider" type="hidden" value="{{ paciente.massa_corporal }}" required>
+                                    <input name="massa" id="listenSlider" type="hidden" value="{{ paciente.massa_corporal|mult:10 }}" required>
                                 </div>
                                 <p class="output">Massa selecionada: <b>{{ paciente.massa_corporal }}</b>kg</p>
                             </div>
@@ -129,7 +129,9 @@
                                             <i class="fa fa-file fileupload-exists"></i>
                                             <span class="fileupload-preview">
                                                 <input type="text" id="path_imagem_exists" name='path_imagem_exists' value="{{paciente.path_imagem}}" hidden>
-                                                {{ paciente.path_imagem|get_media }}
+                                                {% if paciente.path_imagem %}
+                                                    {{ paciente.path_imagem|get_media }}
+                                                {% endif %}
                                             </span>
                                         </div>
 
@@ -139,10 +141,12 @@
                                         </span>
                                         <a class="btn btn-default" data-dismiss="fileupload">Remover</a>
 
-                                        <div class="fileupload-preview">
-                                            <img src="{{ paciente.path_imagem|get_media }}" width="100px">
-                                        </div>
+                                        {% if paciente.path_imagem %}
+                                            <div class="fileupload-preview">
 
+                                                <img src="{{ paciente.path_imagem|get_media }}" width="100px">
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

@@ -5,8 +5,12 @@ import json
 
 register = template.Library()
 
+@register.filter(name='mult')
+def mult(value, arg):
+    return value * arg
 
-@register.filter()
+
+@register.filter(name='age')
 def age(value):
     return datetime.now().year - int(value.year)
 
