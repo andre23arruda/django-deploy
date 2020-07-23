@@ -1,77 +1,49 @@
-from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.files.storage import FileSystemStorage
 
-from reportlab.lib.enums import TA_JUSTIFY
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import inch
-from django.http import FileResponse
-from cadastro_pessoa.models import Paciente, Responsavel, Unidade
-
-import os, uuid, io
-from datetime import datetime
+from cadastro_pessoa.models import Cliente, Paciente, Responsavel, Unidade
+import os
+from shutil import rmtree
+from ..src.utils import video_converter, event_frames
 
 def teste(request, paciente_id):
 
-    paciente = get_object_or_404(Paciente, pk = paciente_id)
+    data = {'path_frames': None, 'path_video': None}
 
-    buffer = io.BytesIO()
+    if request.method == 'POST':
+        paciente = get_object_or_404(Paciente, pk = paciente_id)
 
-    doc = SimpleDocTemplate(buffer,
-                            rightMargin=72,leftMargin=72,
-                            topMargin=72,bottomMargin=18)
-    doc.title = f'report_{paciente.uuid_paciente}'
-    Story=[]
-    logo = paciente.path_imagem
-    styles=getSampleStyleSheet()
-    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+        try:
+            video = request.FILES['path_video']
+            c3d_file = request.FILES['path_c3d']
+            tempo = float(request.POST['tempo'])
+            print(video, c3d_file, tempo, type(tempo))
 
-    im = Image(logo, 2*inch, 2*inch)
-    im.hAlign = 'LEFT'
-    Story.append(im)
-    Story.append(Spacer(1, 12))
+            path_paciente = os.path.join(settings.BASE_DIR, 'media', 'pacientes', paciente.uuid_paciente)
+            path_video = os.path.join(settings.BASE_DIR, 'media', 'pacientes', paciente.uuid_paciente, video.name)
+            path_c3d = os.path.join(settings.BASE_DIR, 'media', 'pacientes', paciente.uuid_paciente, c3d_file.name)
 
-    ptext = f'<font size="12">UUID: { paciente.uuid_paciente }</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+            print(path_video)
 
-    ptext = f'<font size="12">Paciente: { paciente }</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+            # fs = FileSystemStorage()
+            # f = fs.save(path_video, video)
 
-    ptext = f'<font size="12">Data de nascimento: { paciente.data_nascimento.strftime("%d/%m/%Y") }</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+            # fs = FileSystemStorage()
+            # if os.path.exists(path_c3d):
+            #     rmtree(path_c3d)
+            # f = fs.save(path_c3d, c3d_file)
 
-    ptext = f'<font size="12">Gênero: { paciente.genero }</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+            # path_output = video_converter(path_video, path_paciente)
+            # os.remove(path_video)
 
-    ptext = f'<font size="12">Altura: { paciente.estatura }cm</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+            path_frames = None
+            # path_frames = event_frames(path_c3d, path_output, tempo)
+            path_output = os.path.join(settings.BASE_DIR, 'media', 'pacientes', paciente.uuid_paciente, 'output.mp4')
 
-    ptext = f'<font size="12">Massa corporal: { paciente.massa_corporal }kg</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+            data = {'path_frames': path_frames, 'path_video': path_output}
 
-    ptext = f'<font size="12">Reponsável: { paciente.responsavel.nome }</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
+        except:
+            pass
 
-    ptext = f'<font size="12">Unidade: { paciente.unidade }</font>'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
-
-    ptext = f'<font size="12">Status: { paciente.status }</font>'
-    Story.append(Paragraph(ptext, styles["Normal"]))
-    Story.append(Spacer(1, 48))
-
-    ptext = '<font size="12">Harpia Health Solutions</font>'
-    ptext_style = styles['Heading1']
-    ptext_style.alignment = 1
-    Story.append(Paragraph(ptext, ptext_style))
-    Story.append(Spacer(1, 12))
-    doc.build(Story)
-
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='report.pdf')
+    return render(request, 'teste.html', data)

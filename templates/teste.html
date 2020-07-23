@@ -1,239 +1,150 @@
+{% extends './partials/base.html' %}
 {% load static %}
+{% load tag_library %}
 
-<!doctype html>
-<html class="fixed">
-	<head>
+{% block body_content %}
+    <section class="body">
 
-		<!-- Basic -->
-		<meta charset="UTF-8">
-
-		<title>Charts | Okler Themes | Porto-Admin</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Harpia admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
-
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-		<!-- Web Fonts  -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
-
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" />
-		<link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.css' %}" />
-		<link rel="stylesheet" href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" />
-		<link rel="stylesheet" href="{% static 'vendor/bootstrap-datepicker/css/datepicker3.css' %}" />
-
-		<!-- Specific Page Vendor CSS -->
-		<link rel="stylesheet" href="{% static 'vendor/morris/morris.css' %}" />
-
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="{% static 'stylesheets/theme.css' %}" />
-
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="{% static 'stylesheets/skins/default.css' %}" />
-
-		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="{% static 'stylesheets/theme-custom.css' %}">
-
-		<!-- Head Libs -->
-		<script src="{% static 'vendor/modernizr/modernizr.js' %}"></script>
-
-	</head>
-	<body>
-		<section class="body">
+        <!-- start: header -->
+        {% include './partials/header.html' %}
+        <!-- end: header -->
 
 
-			<div class="inner-wrapper">
+        <!-- start: content -->
+        <div class="inner-wrapper">
+            {% include './partials/sidebar.html' %}
 
+			<section role="main" class="content-body">
+				<header class="page-header">
+					<h2>Teste</h2>
 
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Charts</h2>
+				</header>
 
-					</header>
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								<h2 class="panel-title">Paciente</h2>
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal form-bordered" method="POST" enctype="multipart/form-data">
+									{% csrf_token %}
 
-					<!-- start: page -->
-
-					<div class="row">
-						<div class="col-md-12">
-							<section class="panel">
-								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="fa fa-caret-down"></a>
-										<a href="#" class="fa fa-times"></a>
-									</div>
-
-									<h2 class="panel-title">Stacked Chart</h2>
-									<p class="panel-subtitle">Stacked Bar Chart.</p>
-								</header>
-								<div class="panel-body">
-
-									<!-- Morris: Bar -->
-									<div class="chart chart-md" id="morrisStacked"></div>
-									<script>
-
-										var morrisStackedData = [
-											{
-												y: '2004',
-												a: 10,
-												b: 30
-											}, {
-												y: '2005',
-												a: 100,
-												b: 25
-											}, {
-												y: '2006',
-												a: 60,
-												b: 25
-											}, {
-												y: '2007',
-												a: 75,
-												b: 35
-											}, {
-												y: '2008',
-												a: 90,
-												b: 20
-											}, {
-												y: '2009',
-												a: 75,
-												b: 15
-											}, {
-												y: '2010',
-												a: 50,
-												b: 10
-											}, {
-												y: '2011',
-												a: 75,
-												b: 25
-											}, {
-												y: '2012',
-												a: 30,
-												b: 10
-											}, {
-												y: '2013',
-												a: 75,
-												b: 5
-											}, {
-												y: '2014',
-												a: 60,
-												b: 8
-											}];
-										var xkey = 'y'
-										var ykeys = ['a', 'b']
-										var labels = ['value 1', 'value 2']
-										var barColors = ['#0088cc', '#2baab1']
-
-									</script>
-
-								</div>
-							</section>
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col-md-6">
-							<section class="panel">
-								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="fa fa-caret-down"></a>
-										<a href="#" class="fa fa-times"></a>
-									</div>
-
-									<h2 class="panel-title">Donut Chart</h2>
-									<p class="panel-subtitle">Donut Chart are functionally identical to pie charts.</p>
-								</header>
-								<div class="panel-body">
-
-									<!-- Morris: Donut -->
-									<div class="chart chart-md" id="morrisDonut"></div>
-									<script type="text/javascript">
-
-										var morrisDonutData = [
-											{label: "Porto Template", value: 50},
-											{label: "Tucson Template", value: 90},
-											{label: "Harpia admin", value: 20}
-										];
-										var colorsData = ['#E36159', '#734ba9', '#47a447']
-
-									</script>
-
-								</div>
-							</section>
-						</div>
-
-						<div class="col-md-6">
-							<div class="row">
-								<div class="col-md-12">
-									<section class="panel">
-										<header class="panel-heading">
-											<div class="panel-actions">
-												<a href="#" class="fa fa-caret-down"></a>
-												<a href="#" class="fa fa-times"></a>
-											</div>
-
-											<h2 class="panel-title">Liquid Meter</h2>
-											<p class="panel-subtitle">Exclusive Plug-in by Okler Themes</p>
-										</header>
-										<div class="panel-body">
-											<div class="row">
-												<div class="col-md-6">
-													<meter min="0" max="100" value="35" id="meter"></meter>
-												</div>
-												<div class="col-md-6">
-													<meter min="0" max="100" value="85" id="meterDark"></meter>
+									<!-- Tempo -->
+									<div class="form-group">
+										<label class="col-md-3 control-label">Tempo (s)</label>
+										<div class="col-md-6">
+											<div data-plugin-spinner data-plugin-options='{ "value":10, "step": 0.01, "min": 0, "max": 10000 }'>
+												<div class="input-group input-small">
+													<input name="tempo" type="text" class="spinner-input form-control">
+													<div class="spinner-buttons input-group-btn btn-group-vertical">
+														<button type="button" class="btn spinner-up btn-xs btn-default">
+															<i class="fa fa-angle-up"></i>
+														</button>
+														<button type="button" class="btn spinner-down btn-xs btn-default">
+															<i class="fa fa-angle-down"></i>
+														</button>
+													</div>
 												</div>
 											</div>
 										</div>
-									</section>
-								</div>
+									</div>
+
+									<!-- Vídeo -->
+									<div class="form-group">
+										<label class="col-md-3 control-label">Vídeo</label>
+										<div class="col-md-6">
+											<div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
+												<div class="input-append">
+													<div class="uneditable-input" style="width: 70%;">
+														<i class="fa fa-file fileupload-exists"></i>
+														<span class="fileupload-preview"></span>
+													</div>
+													<span class="btn btn-default btn-file">
+														<span class="fileupload-exists">Trocar</span>
+														<span class="fileupload-new">Selecionar vídeo</span>
+														<input type="file" name='path_video'>
+													</span>
+													<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- c3d -->
+									<div class="form-group">
+										<label class="col-md-3 control-label">Arquivo C3D</label>
+										<div class="col-md-6">
+											<div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
+												<div class="input-append">
+													<div class="uneditable-input" style="width: 70%;">
+														<i class="fa fa-file fileupload-exists"></i>
+														<span class="fileupload-preview"></span>
+													</div>
+													<span class="btn btn-default btn-file">
+														<span class="fileupload-exists">Trocar</span>
+														<span class="fileupload-new">Selecionar arquivo</span>
+														<input type="file" name='path_c3d'>
+													</span>
+													<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-9 text-right">
+										<button class="btn btn-primary">Enviar</button>
+										<button type="reset" class="btn btn-default">Reset</button>
+									</div>
+
+								</form>
+							</div>
+						</section>
+					</div>
+				</div>
+
+				{% if path_frames %}
+					<section class="panel">
+						<header class="panel-heading">
+							<div class="panel-actions">
+								<a href="#" class="fa fa-caret-down"></a>
+								<a href="#" class="fa fa-times"></a>
+							</div>
+
+							<h2 class="panel-title">Frames</h2>
+							<p class="panel-subtitle">Frames retirados a partir do vídeo e do c3d</p>
+						</header>
+						<div class="panel-body">
+							<div class="zoom-gallery">
+								{% for k, path_frame in path_frames.items %}
+									<a class="pull-left mb-xs mr-xs" href="{{ path_frame|get_media }}" title="{{ path_frame|get_media }}"><img class="img-responsive" src="{{ path_frame|get_media }}" width="160"></a>
+								{% endfor %}
 							</div>
 						</div>
-					</div>
+					</section>
+				{% endif %}
 
 
-					<!-- end: page -->
-				</section>
-			</div>
+				{% if path_video %}
+					<section class="panel">
+						<header class="panel-heading">
+							<div class="panel-actions">
+								<a href="#" class="fa fa-caret-down"></a>
+								<a href="#" class="fa fa-times"></a>
+							</div>
+							<h2 class="panel-title">Vídeo</h2>
+						</header>
+						<div class="panel-body text-center">
+							<video width="800" controls>
+								<source src="{{ path_video|get_media }}" type="video/mp4">
+							  </video>
+						</div>
+					</section>
+				{% endif %}
 
-		</section>
+			</section>
+        </div>
+        <!-- end: content -->
 
-		<!-- Vendor -->
-		<script src="{% static 'vendor/jquery/jquery.js' %}"></script>
-		<script src="{% static 'vendor/jquery-browser-mobile/jquery.browser.mobile.js' %}"></script>
-		<script src="{% static 'vendor/bootstrap/js/bootstrap.js' %}"></script>
-		<script src="{% static 'vendor/nanoscroller/nanoscroller.js' %}"></script>
-		<script src="{% static 'vendor/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
-		<script src="{% static 'vendor/magnific-popup/magnific-popup.js' %}"></script>
-		<script src="{% static 'vendor/jquery-placeholder/jquery.placeholder.js' %}"></script>
-
-		<!-- Specific Page Vendor -->
-		<script src="{% static 'vendor/jquery-appear/jquery.appear.js' %}"></script>
-		<script src="{% static 'vendor/jquery-easypiechart/jquery.easypiechart.js' %}"></script>
-		<script src="{% static 'vendor/flot/jquery.flot.js' %}"></script>
-		<script src="{% static 'vendor/flot-tooltip/jquery.flot.tooltip.js' %}"></script>
-		<script src="{% static 'vendor/flot/jquery.flot.pie.js' %}"></script>
-		<script src="{% static 'vendor/flot/jquery.flot.categories.js' %}"></script>
-		<script src="{% static 'vendor/flot/jquery.flot.resize.js' %}"></script>
-		<script src="{% static 'vendor/jquery-sparkline/jquery.sparkline.js' %}"></script>
-		<script src="{% static 'vendor/raphael/raphael.js' %}"></script>
-		<script src="{% static 'vendor/morris/morris.js' %}"></script>
-		<script src="{% static 'vendor/gauge/gauge.js' %}"></script>
-		<script src="{% static 'vendor/snap-svg/snap.svg.js' %}"></script>
-		<script src="{% static 'vendor/liquid-meter/liquid.meter.js' %}"></script>
-
-		<!-- Theme Base, Components and Settings -->
-		<script src="{% static 'javascripts/theme.js' %}"></script>
-
-		<!-- Theme Custom -->
-		<script src="{% static 'javascripts/theme.custom.js' %}"></script>
-
-		<!-- Theme Initialization Files -->
-		<script src="{% static 'javascripts/theme.init.js' %}"></script>
-
-
-		<!-- Examples -->
-		<script src="{% static 'javascripts/ui-elements/use_charts.js' %}"></script>
-	</body>
-</html>
+    </section>
+{% endblock %}
