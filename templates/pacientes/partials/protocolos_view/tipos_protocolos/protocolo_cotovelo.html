@@ -1,0 +1,44 @@
+{% load tag_library %}
+<section class="panel panel-featured-left panel-featured-success">
+
+    <header class="panel-heading panel-collapse collapse in">
+        <div class="panel-actions">
+            <a href="#" class="fa fa-caret-up"></a>
+            <a href="#exclude_{{ protocolo }}" class="modal-with-move-anim"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="widget-summary widget-summary-sm">
+            <div class="widget-summary-col widget-summary-col-icon">
+                <div class="summary-icon bg-info">
+                    <i class="fa fa-child"></i>
+                </div>
+            </div>
+            <div class="widget-summary-col">
+                <div class="summary">
+                    <h4 class="titleProtocol text-semi-bold">Cervical</h4>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="panel-body" style="display: none;">
+        <div class="row">
+            <div class="col-sm-12"><p class="questionModalProtocol"></span> Campo 1:</p></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Esq:</span><input name="{{data_exame|date_replace}}_voleibol" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:0 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dir:</span><input name="{{data_exame|date_replace}}_voleibol" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:1 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dif:</span><input name="{{data_exame|date_replace}}_voleibol" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:2 }}" {% endif %}></div></div>
+            <div class="col-sm-12"><code>Valor de Referência: Menor do que 30°</code></div>
+        </div>
+
+        <hr style="margin:8px;">
+
+        <div class="row">
+            <div class="col-sm-12"><p class="questionModalProtocol"></span> Campo 2:</p></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Esq:</span><input name="{{data_exame|date_replace}}_voleibol" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:3 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dir:</span><input name="{{data_exame|date_replace}}_voleibol" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:4 }}" {% endif %}></div></div>
+            <div class="col-sm-4" data-plugin-spinner="" data-plugin-options="{ &quot;value&quot;:30, &quot;step&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 360 }"><div class="input-group"><span class="input-group-addon labelAddon" style="font-family: monospace;" style="font-family: monospace;">Dif:</span><input name="{{data_exame|date_replace}}_voleibol" type="text" class="spinner-input form-control" maxlength="3" {% if value %} value="{{ value|get_index_value:5 }}" {% endif %}></div></div>
+            <div class="col-sm-12"><code>Valor de Referência: Menor do que 30°</code></div>
+        </div>
+    </div>
+
+</section>
